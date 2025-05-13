@@ -1,0 +1,18 @@
+classDiagram
+    class WeatherForecastApp {
+        - String TARGET_URL
+        + main(String[] args)
+    }
+    class WeatherDataFetcher {
+        + fetchWeatherData(String targetUrl) String
+    }
+    class WeatherDataParser {
+        + parseWeatherData(String jsonData) List<String[]>
+    }
+    class WeatherDataPrinter {
+        + printWeatherData(List<String[]> weatherInfo)
+    }
+
+    WeatherForecastApp --> WeatherDataFetcher
+    WeatherForecastApp --> WeatherDataParser
+    WeatherForecastApp --> WeatherDataPrinter
