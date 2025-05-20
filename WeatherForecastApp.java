@@ -51,7 +51,7 @@ class WeatherDataFetcher {
 
 // JSONデータ解析用クラス
 class WeatherDataParser {
-    // 天気JSONデータを解析し、日付と天気情報のリストを返す
+    // 天気JSONデータを解析し、日付・天気・紫外線情報のリストを返す
     public List<String[]> parseWeatherData(String jsonData) {
         JSONArray rootArray = new JSONArray(jsonData);
         JSONObject timeStringObject = rootArray.getJSONObject(0)
@@ -62,10 +62,23 @@ class WeatherDataParser {
         JSONArray weathersArray = timeStringObject.getJSONArray("areas")
                 .getJSONObject(0).getJSONArray("weathers");
 
+        // 紫外線情報の取得（仮: 2番目の timeSeries 配列に含まれると仮定）
+        JSONArray timeSeriesArray = rootArray.getJSONObject(0).getJSONArray("timeSeries");
+        JSONArray uvArray = null;
+        for (int i = 0; i < timeSeriesArray.length(); i++) {
+            JSONObject obj = timeSeriesArray.getJSONObject(i);
+            if (obj.has("areas") && obj.getJSONArray("areas").getJSONObject(0).has("uvIndex")) {
+                uvArray = obj.getJSONArray("areas").getJSONObject(0).getJSONArray("uvIndex");
+                break;
+            }
+        }
+
         for (int i = 0; i < timeDefinesArray.length(); i++) {
+            String uv = (uvArray != null && i < uvArray.length()) ? uvArray.getString(i) : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
-                    weathersArray.getString(i)
+                    weathersArray.getString(i),
+                    uv
             });
         }
         return weatherInfo;
@@ -76,11 +89,12 @@ class WeatherDataParser {
 class WeatherDataPrinter {
     // 解析した天気データをコンソールに出力
     public void printWeatherData(List<String[]> weatherInfo) {
+        System.out.println("日付        天気    紫外線指数");
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             System.out.println(
-                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） " + info[1]);
+                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） " + info[1] + "    " + info[2]);
         }
     }
 }
