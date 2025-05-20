@@ -7,8 +7,10 @@ import java.net.URL;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -72,8 +74,9 @@ class WeatherDataPrinter {
     public void printWeatherData(List<String[]> weatherInfo) {
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
+            String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             System.out.println(
-                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + " " + info[1]);
+                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） " + info[1]);
         }
     }
 }
