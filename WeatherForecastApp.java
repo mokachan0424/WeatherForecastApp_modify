@@ -53,16 +53,26 @@ class WeatherDataParser {
         JSONArray rootArray = new JSONArray(jsonData);
         JSONObject timeStringObject = rootArray.getJSONObject(0)
                 .getJSONArray("timeSeries").getJSONObject(0);
+        // 天気
+        JSONObject weatherObject = rootArray.getJSONObject(0)
+                .getJSONArray("timeSeries").getJSONObject(1);
+        // 降水確率
+        JSONObject popObject = rootArray.getJSONObject(0)
+                .getJSONArray("timeSeries").getJSONObject(1);
 
         List<String[]> weatherInfo = new ArrayList<>();
         JSONArray timeDefinesArray = timeStringObject.getJSONArray("timeDefines");
         JSONArray weathersArray = timeStringObject.getJSONArray("areas")
                 .getJSONObject(0).getJSONArray("weathers");
+        JSONArray popsArray = popObject.getJSONArray("areas")
+                .getJSONObject(0).getJSONArray("pops");
 
         for (int i = 0; i < timeDefinesArray.length(); i++) {
+            String pop = (i < popsArray.length() && !popsArray.isNull(i)) ? popsArray.getString(i) : "--";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i)
+                            + " 降水確率: " + pop + "%"
             });
         }
         return weatherInfo;
