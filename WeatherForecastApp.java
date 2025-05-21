@@ -149,7 +149,7 @@ class WeatherDataPrinter {
         java.time.LocalDate today = java.time.LocalDate.now();
         // 2025年5月下旬の例として「やや多い」固定で表示
         String pollenLevel = "やや多い";
-        System.out.println("\n【大阪府の花粉情報（今日から3日間）】");
+        System.out.println("\n【大阪府の花粉情報】");
         for (int i = 0; i < 3; i++) {
             java.time.LocalDate date = today.plusDays(i);
             String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.JAPANESE);
