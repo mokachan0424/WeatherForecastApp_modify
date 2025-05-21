@@ -52,8 +52,8 @@ class WeatherDataFetcher {
 // JSONデータ解析用クラス
 class WeatherDataParser {
     // 天気JSONデータを解析し、日付・天気・風速情報のリストを返す
-    public List<String[]> parseWeatherData(String weatherJson) {
-        JSONArray rootArray = new JSONArray(weatherJson);
+    public List<String[]> parseWeatherData(String jsonData) {
+        JSONArray rootArray = new JSONArray(jsonData);
         JSONObject timeStringObject = rootArray.getJSONObject(0)
                 .getJSONArray("timeSeries").getJSONObject(0);
 
@@ -61,32 +61,18 @@ class WeatherDataParser {
         JSONArray timeDefinesArray = timeStringObject.getJSONArray("timeDefines");
         JSONArray weathersArray = timeStringObject.getJSONArray("areas")
                 .getJSONObject(0).getJSONArray("weathers");
-        // 風速情報の取得
+        // 風速情報の取得（仮: 1番目の timeSeries 配列の areas 内の winds 配列と仮定）
         JSONArray windsArray = null;
         if (timeStringObject.getJSONArray("areas").getJSONObject(0).has("winds")) {
             windsArray = timeStringObject.getJSONArray("areas").getJSONObject(0).getJSONArray("winds");
         }
 
-        // 降水確率情報の取得（2番目以降のtimeSeriesに"pops"がある場合）
-        JSONArray popsArray = null;
-        JSONArray timeSeriesArr = rootArray.getJSONObject(0).getJSONArray("timeSeries");
-        for (int i = 0; i < timeSeriesArr.length(); i++) {
-            JSONObject ts = timeSeriesArr.getJSONObject(i);
-            JSONArray areas = ts.getJSONArray("areas");
-            if (areas.getJSONObject(0).has("pops")) {
-                popsArray = areas.getJSONObject(0).getJSONArray("pops");
-                break;
-            }
-        }
-
         for (int i = 0; i < timeDefinesArray.length(); i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
-            String pop = (popsArray != null && i < popsArray.length()) ? popsArray.getString(i) + "%" : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i),
-                    wind,
-                    pop
+                    wind
             });
         }
         return weatherInfo;
@@ -96,72 +82,34 @@ class WeatherDataParser {
 // 天気データ表示用クラス
 class WeatherDataPrinter {
     // 解析した天気データをコンソールに出力
+    // 各データは日付、天気、風速の順で表示されます
     public void printWeatherData(List<String[]> weatherInfo) {
-        System.out.println("日付        天気    風速    降水確率");
+        System.out.println("日付        天気    風速"); // ヘッダー行を表示
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
-            String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
+            String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE); // 曜日を日本語で取得
             System.out.println(
                     dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） " + info[1] + "    "
-                            + info[2] + "    " + info[3]);
-        }
-    }
-
-    // 天気データをHTMLテーブルで画像付き出力
-    public void printWeatherDataAsHtml(List<String[]> weatherInfo, String filePath) {
-        StringBuilder html = new StringBuilder();
-        html.append("<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n<meta charset=\"UTF-8\">\n<title>天気予報</title>\n</head>\n<body>\n");
-        html.append("<h1>大阪の天気予報</h1>\n");
-        html.append("<table border=\"1\">\n<tr><th>日付</th><th>天気</th><th>風速</th><th>画像</th></tr>\n");
-        for (String[] info : weatherInfo) {
-            LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
-            String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
-            String weather = info[1];
-            String imgFile = "";
-            if (weather.contains("晴")) imgFile = "hare.png";
-            else if (weather.contains("雨")) imgFile = "ame.png";
-            else if (weather.contains("曇")) imgFile = "kumori.png";
-            else if (weather.contains("雪")) imgFile = "yuki.png";
-            else imgFile = "";
-            html.append("<tr>");
-            html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（").append(youbi).append("）</td>");
-            html.append("<td>").append(weather).append("</td>");
-            html.append("<td>").append(info[2]).append("</td>");
-            if (!imgFile.isEmpty()) {
-                html.append("<td><img src='img/").append(imgFile).append("' alt='").append(weather).append("' width='40'></td>");
-            } else {
-                html.append("<td></td>");
-            }
-            html.append("</tr>\n");
-        }
-        html.append("</table>\n</body>\n</html>");
-
-        try (java.io.FileWriter writer = new java.io.FileWriter(filePath)) {
-            writer.write(html.toString());
-            System.out.println("HTMLファイルを出力しました: " + filePath);
-        } catch (IOException e) {
-            System.out.println("HTML出力エラー: " + e.getMessage());
+                            + info[2]); // 日付、天気、風速をフォーマットして表示
         }
     }
 }
 
 // メイン処理クラス
 public class WeatherForecastApp {
-    private static final String TARGET_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json";
+    private static final String TARGET_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json"; // 気象庁の天気予報APIのURL
 
     public static void main(String[] args) {
-        WeatherDataFetcher fetcher = new WeatherDataFetcher();
-        WeatherDataParser parser = new WeatherDataParser();
-        WeatherDataPrinter printer = new WeatherDataPrinter();
+        WeatherDataFetcher fetcher = new WeatherDataFetcher(); // 天気データ取得用クラスのインスタンスを作成
+        WeatherDataParser parser = new WeatherDataParser(); // JSONデータ解析用クラスのインスタンスを作成
+        WeatherDataPrinter printer = new WeatherDataPrinter(); // 天気データ表示用クラスのインスタンスを作成
 
         try {
-            String jsonData = fetcher.fetchWeatherData(TARGET_URL);
-            List<String[]> weatherInfo = parser.parseWeatherData(jsonData);
-            printer.printWeatherData(weatherInfo);
-            // HTML出力
-            printer.printWeatherDataAsHtml(weatherInfo, "weather.html");
+            String jsonData = fetcher.fetchWeatherData(TARGET_URL); // 天気データを取得
+            List<String[]> weatherInfo = parser.parseWeatherData(jsonData); // JSONデータを解析
+            printer.printWeatherData(weatherInfo); // 解析結果を表示
         } catch (IOException | URISyntaxException e) {
-            System.out.println("エラーが発生しました: " + e.getMessage());
+            System.out.println("エラーが発生しました: " + e.getMessage()); // エラー発生時のメッセージを表示
         }
     }
 }
