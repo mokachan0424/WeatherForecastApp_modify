@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../WeatherForecastApp"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.project.referencedLibraries": [
+			"lib/**/*.jar",
+			"json-20250107.jar"
+		]
+	}
+}
