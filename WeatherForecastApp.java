@@ -92,6 +92,43 @@ class WeatherDataPrinter {
                             + info[2]);
         }
     }
+
+    // 天気データをHTMLテーブルで画像付き出力
+    public void printWeatherDataAsHtml(List<String[]> weatherInfo, String filePath) {
+        StringBuilder html = new StringBuilder();
+        html.append("<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n<meta charset=\"UTF-8\">\n<title>天気予報</title>\n</head>\n<body>\n");
+        html.append("<h1>大阪の天気予報</h1>\n");
+        html.append("<table border=\"1\">\n<tr><th>日付</th><th>天気</th><th>風速</th><th>画像</th></tr>\n");
+        for (String[] info : weatherInfo) {
+            LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
+            String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
+            String weather = info[1];
+            String imgFile = "";
+            if (weather.contains("晴")) imgFile = "hare.png";
+            else if (weather.contains("雨")) imgFile = "ame.png";
+            else if (weather.contains("曇")) imgFile = "kumori.png";
+            else if (weather.contains("雪")) imgFile = "yuki.png";
+            else imgFile = "";
+            html.append("<tr>");
+            html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（").append(youbi).append("）</td>");
+            html.append("<td>").append(weather).append("</td>");
+            html.append("<td>").append(info[2]).append("</td>");
+            if (!imgFile.isEmpty()) {
+                html.append("<td><img src='img/").append(imgFile).append("' alt='").append(weather).append("' width='40'></td>");
+            } else {
+                html.append("<td></td>");
+            }
+            html.append("</tr>\n");
+        }
+        html.append("</table>\n</body>\n</html>");
+
+        try (java.io.FileWriter writer = new java.io.FileWriter(filePath)) {
+            writer.write(html.toString());
+            System.out.println("HTMLファイルを出力しました: " + filePath);
+        } catch (IOException e) {
+            System.out.println("HTML出力エラー: " + e.getMessage());
+        }
+    }
 }
 
 // メイン処理クラス
@@ -107,6 +144,8 @@ public class WeatherForecastApp {
             String jsonData = fetcher.fetchWeatherData(TARGET_URL);
             List<String[]> weatherInfo = parser.parseWeatherData(jsonData);
             printer.printWeatherData(weatherInfo);
+            // HTML出力
+            printer.printWeatherDataAsHtml(weatherInfo, "weather.html");
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage());
         }
