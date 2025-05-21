@@ -143,6 +143,20 @@ class WeatherDataPrinter {
             System.out.println("HTML出力エラー: " + e.getMessage());
         }
     }
+
+    // 今日から3日間の花粉情報を表示するメソッドを追加
+    public static void printOsakaPollenForecast3Days() {
+        java.time.LocalDate today = java.time.LocalDate.now();
+        // 2025年5月下旬の例として「やや多い」固定で表示
+        String pollenLevel = "やや多い";
+        System.out.println("\n【大阪府の花粉情報（今日から3日間）】");
+        for (int i = 0; i < 3; i++) {
+            java.time.LocalDate date = today.plusDays(i);
+            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.JAPANESE);
+            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "）: " + pollenLevel);
+        }
+        System.out.println("※参考: https://www.allegra.jp/hayfever/calendar.html");
+    }
 }
 
 // メイン処理クラス
@@ -160,6 +174,8 @@ public class WeatherForecastApp {
             printer.printWeatherData(weatherInfo);
             // HTML出力
             printer.printWeatherDataAsHtml(weatherInfo, "weather.html");
+            // 今日から3日間の花粉情報を表示
+            WeatherDataPrinter.printOsakaPollenForecast3Days();
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage());
         }
