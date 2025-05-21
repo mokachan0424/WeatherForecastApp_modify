@@ -11,19 +11,21 @@ import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * 天気アプリ - 本体
- * このアプリケーションは、気象庁のWeb APIから大阪府の天気予報データを取得して表示します
+ * 天気予報アプリ
+ * このアプリケーションは、気象庁のWeb APIから大阪府の天気予報データを取得し、表示します。
+ * 
+ * org.jsonライブラリを使用するために、依存関係をプロジェクトに追加する必要があります。
  * 
  * @author n.katayama
  * @version 1.0
  */
-// WeatherDataFetcher クラス: 天気データを取得する
+// 天気データ取得用クラス
 class WeatherDataFetcher {
+    // 指定URLから天気データ(JSON)を取得
     public String fetchWeatherData(String targetUrl) throws IOException, URISyntaxException {
         URI uri = new URI(targetUrl);
         URL url = uri.toURL();
@@ -42,13 +44,14 @@ class WeatherDataFetcher {
             }
             return responseBody.toString();
         } else {
-            throw new IOException("Failed to fetch data. Response code: " + responseCode);
+            throw new IOException("データ取得に失敗しました。レスポンスコード: " + responseCode);
         }
     }
 }
 
-// WeatherDataParser クラス: JSONデータを解析する
+// JSONデータ解析用クラス
 class WeatherDataParser {
+    // 天気JSONデータを解析し、日付・天気・風速情報のリストを返す
     public List<String[]> parseWeatherData(String jsonData) {
         JSONArray rootArray = new JSONArray(jsonData);
         JSONObject timeStringObject = rootArray.getJSONObject(0)
@@ -64,34 +67,33 @@ class WeatherDataParser {
         JSONArray timeDefinesArray = timeStringObject.getJSONArray("timeDefines");
         JSONArray weathersArray = timeStringObject.getJSONArray("areas")
                 .getJSONObject(0).getJSONArray("weathers");
-        JSONArray popsArray = popObject.getJSONArray("areas")
-                .getJSONObject(0).getJSONArray("pops");
 
         for (int i = 0; i < timeDefinesArray.length(); i++) {
-            String pop = (i < popsArray.length() && !popsArray.isNull(i)) ? popsArray.getString(i) : "--";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i)
-                            + " 降水確率: " + pop + "%"
             });
         }
         return weatherInfo;
     }
 }
 
-// WeatherDataPrinter クラス: データを表示する
+// 天気データ表示用クラス
 class WeatherDataPrinter {
+    // 解析した天気データをコンソールに出力
     public void printWeatherData(List<String[]> weatherInfo) {
+        System.out.println("日付        天気    風速");
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             System.out.println(
-                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） " + info[1]);
+                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + " " + info[1]+ "    "
+                    + info[2]);
         }
     }
 }
 
-// WeatherForecastApp クラス: メイン処理
+// メイン処理クラス
 public class WeatherForecastApp {
     private static final String TARGET_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json";
 
