@@ -51,27 +51,47 @@ class WeatherDataFetcher {
 
 // JSONデータ解析用クラス
 class WeatherDataParser {
-    // 天気JSONデータを解析し、日付・天気・風速情報のリストを返す
+    // 天気JSONデータを解析し、日付・天気・風速・降水確率情報のリストを返す
     public List<String[]> parseWeatherData(String jsonData) {
         JSONArray rootArray = new JSONArray(jsonData);
-        JSONObject timeStringObject = rootArray.getJSONObject(0)
-                .getJSONArray("timeSeries").getJSONObject(0);
-        // 天気
+        // 天気・風
         JSONObject weatherObject = rootArray.getJSONObject(0)
-                .getJSONArray("timeSeries").getJSONObject(1);
+                .getJSONArray("timeSeries").getJSONObject(0);
         // 降水確率
         JSONObject popObject = rootArray.getJSONObject(0)
                 .getJSONArray("timeSeries").getJSONObject(1);
 
         List<String[]> weatherInfo = new ArrayList<>();
-        JSONArray timeDefinesArray = timeStringObject.getJSONArray("timeDefines");
-        JSONArray weathersArray = timeStringObject.getJSONArray("areas")
+        JSONArray timeDefinesArray = weatherObject.getJSONArray("timeDefines");
+        JSONArray weathersArray = weatherObject.getJSONArray("areas")
                 .getJSONObject(0).getJSONArray("weathers");
 
+        JSONArray windsArray = null;
+        if (weatherObject.getJSONArray("areas").getJSONObject(0).has("winds")) {
+            windsArray = weatherObject.getJSONArray("areas").getJSONObject(0).getJSONArray("winds");
+        }
+
+        JSONArray popsArray = popObject.getJSONArray("areas")
+                .getJSONObject(0).getJSONArray("pops");
+
+        // 信頼度（reliabilities）は存在しない場合もあるのでnullチェック
+        JSONArray reliabilitiesArray = null;
+        if (weatherObject.getJSONArray("areas").getJSONObject(0).has("reliabilities")) {
+            reliabilitiesArray = weatherObject.getJSONArray("areas").getJSONObject(0).getJSONArray("reliabilities");
+        }
+
         for (int i = 0; i < timeDefinesArray.length(); i++) {
+            String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
+            String pop = (i < popsArray.length() && !popsArray.isNull(i) && !popsArray.getString(i).isEmpty())
+                    ? popsArray.getString(i) + "%" : "--";
+            String reliability = (reliabilitiesArray != null && i < reliabilitiesArray.length() && !reliabilitiesArray.isNull(i))
+                    ? reliabilitiesArray.getString(i) : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
-                    weathersArray.getString(i)
+                    weathersArray.getString(i),
+                    wind,
+                    pop,
+                    reliability
             });
         }
         return weatherInfo;
@@ -82,13 +102,13 @@ class WeatherDataParser {
 class WeatherDataPrinter {
     // 解析した天気データをコンソールに出力
     public void printWeatherData(List<String[]> weatherInfo) {
-        System.out.println("日付        天気    風速");
+        System.out.println("日付        天気    風速    降水確率  信頼度");
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             System.out.println(
-                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + " " + info[1]+ "    "
-                    + info[2]);
+                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） "
+                    + info[1] + "    " + info[2] + "    " + info[3] + "    " + info[4]);
         }
     }
 }
