@@ -61,13 +61,14 @@ class WeatherDataParser {
         JSONArray timeDefinesArray = timeStringObject.getJSONArray("timeDefines");
         JSONArray weathersArray = timeStringObject.getJSONArray("areas")
                 .getJSONObject(0).getJSONArray("weathers");
-        // 風速情報の取得（仮: 1番目の timeSeries 配列の areas 内の winds 配列と仮定）
         JSONArray windsArray = null;
         if (timeStringObject.getJSONArray("areas").getJSONObject(0).has("winds")) {
             windsArray = timeStringObject.getJSONArray("areas").getJSONObject(0).getJSONArray("winds");
         }
 
-        for (int i = 0; i < timeDefinesArray.length(); i++) {
+        // 7日間分のデータを取得するように変更
+        int daysToFetch = Math.min(7, timeDefinesArray.length());
+        for (int i = 0; i < daysToFetch; i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
