@@ -56,6 +56,7 @@ class WeatherDataParser {
         JSONArray rootArray = new JSONArray(jsonData);
         // 天気・風
         JSONObject weatherObject = rootArray.getJSONObject(0)
+
                 .getJSONArray("timeSeries").getJSONObject(0);
         // 降水確率
         JSONObject popObject = rootArray.getJSONObject(0)
@@ -78,6 +79,7 @@ class WeatherDataParser {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             String pop = (i < popsArray.length() && !popsArray.isNull(i) && !popsArray.getString(i).isEmpty())
                     ? popsArray.getString(i) + "%" : "--";
+
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i),
@@ -116,6 +118,8 @@ public class WeatherForecastApp {
         try {
             String jsonData = fetcher.fetchWeatherData(TARGET_URL);
             List<String[]> weatherInfo = parser.parseWeatherData(jsonData);
+            printer.printWeatherData(weatherInfo);
+            // HTML出力
             printer.printWeatherData(weatherInfo);
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage());
