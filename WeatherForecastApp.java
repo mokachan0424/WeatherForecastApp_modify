@@ -79,7 +79,7 @@ class WeatherDataParser {
             }
         }
 
-        for (int i = 0; i < timeDefinesArray.length()&& i<7; i++) {
+        for (int i = 0; i < timeDefinesArray.length() && i < 7; i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             String pop = (popsArray != null && i < popsArray.length()) ? popsArray.getString(i) + "%" : "-";
             weatherInfo.add(new String[] {
@@ -97,20 +97,25 @@ class WeatherDataParser {
 class WeatherDataPrinter {
     // 解析した天気データをコンソールに出力
     public void printWeatherData(List<String[]> weatherInfo) {
-        System.out.println("日付        天気    風速    降水確率");
+        String pollenLevel = "やや多い";
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
-            System.out.println(
-                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） " + info[1] + "    "
-                            + info[2] + "    " + info[3]);
+            System.out
+                    .println("[日付]: " + dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "）");
+            System.out.println("[天気]: " + info[1]);
+            System.out.println("[風速]: " + info[2]);
+            System.out.println("[降水確率]: " + info[3]);
+            System.out.println("[花粉情報]: " + pollenLevel);
+            System.out.println("----------------------");
         }
     }
 
     // 天気データをHTMLテーブルで画像付き出力
     public void printWeatherDataAsHtml(List<String[]> weatherInfo, String filePath) {
         StringBuilder html = new StringBuilder();
-        html.append("<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n<meta charset=\"UTF-8\">\n<title>天気予報</title>\n</head>\n<body>\n");
+        html.append(
+                "<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n<meta charset=\"UTF-8\">\n<title>天気予報</title>\n</head>\n<body>\n");
         html.append("<h1>大阪の天気予報</h1>\n");
         html.append("<table border=\"1\">\n<tr><th>日付</th><th>天気</th><th>風速</th><th>画像</th></tr>\n");
         for (String[] info : weatherInfo) {
@@ -118,17 +123,23 @@ class WeatherDataPrinter {
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             String weather = info[1];
             String imgFile = "";
-            if (weather.contains("晴")) imgFile = "hare.png";
-            else if (weather.contains("雨")) imgFile = "ame.png";
-            else if (weather.contains("曇")) imgFile = "kumori.png";
-        
-            else imgFile = "";
+            if (weather.contains("晴"))
+                imgFile = "hare.png";
+            else if (weather.contains("雨"))
+                imgFile = "ame.png";
+            else if (weather.contains("曇"))
+                imgFile = "kumori.png";
+
+            else
+                imgFile = "";
             html.append("<tr>");
-            html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（").append(youbi).append("）</td>");
+            html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（")
+                    .append(youbi).append("）</td>");
             html.append("<td>").append(weather).append("</td>");
             html.append("<td>").append(info[2]).append("</td>");
             if (!imgFile.isEmpty()) {
-                html.append("<td><img src='img/").append(imgFile).append("' alt='").append(weather).append("' width='40'></td>");
+                html.append("<td><img src='img/").append(imgFile).append("' alt='").append(weather)
+                        .append("' width='40'></td>");
             } else {
                 html.append("<td></td>");
             }
@@ -149,11 +160,13 @@ class WeatherDataPrinter {
         java.time.LocalDate today = java.time.LocalDate.now();
         // 2025年5月下旬の例として「やや多い」固定で表示
         String pollenLevel = "やや多い";
-        System.out.println("\n【大阪府の花粉情報】");
+        System.out.println("\n[大阪府の花粉情報]");
         for (int i = 0; i < 3; i++) {
             java.time.LocalDate date = today.plusDays(i);
-            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.JAPANESE);
-            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "）: " + pollenLevel);
+            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
+                    java.util.Locale.JAPANESE);
+            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
+                    + "）: " + pollenLevel);
         }
         System.out.println("※参考: https://www.allegra.jp/hayfever/calendar.html");
     }
