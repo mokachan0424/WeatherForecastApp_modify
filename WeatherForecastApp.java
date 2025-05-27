@@ -51,7 +51,7 @@ class WeatherDataFetcher {
 
 // JSONデータ解析用クラス
 class WeatherDataParser {
-    // 天気JSONデータを解析し、日付・天気・風速情報のリストを返す
+    // 天気JSONデータを解析し、日付・天気・風速・波の高さ情報のリストを返す
     public List<String[]> parseWeatherData(String jsonData) {
         JSONArray rootArray = new JSONArray(jsonData);
         JSONObject timeStringObject = rootArray.getJSONObject(0)
@@ -62,28 +62,23 @@ class WeatherDataParser {
         JSONArray weathersArray = timeStringObject.getJSONArray("areas")
                 .getJSONObject(0).getJSONArray("weathers");
         JSONArray windsArray = null;
+        JSONArray wavesArray = null;
+
         if (timeStringObject.getJSONArray("areas").getJSONObject(0).has("winds")) {
             windsArray = timeStringObject.getJSONArray("areas").getJSONObject(0).getJSONArray("winds");
         }
-
-        // 降水確率情報の取得（2番目以降のtimeSeriesに"pops"がある場合）
-        JSONArray popsArray = null;
-        JSONArray timeSeriesArr = rootArray.getJSONObject(0).getJSONArray("timeSeries");
-        for (int i = 0; i < timeSeriesArr.length(); i++) {
-            JSONObject ts = timeSeriesArr.getJSONObject(i);
-            JSONArray areas = ts.getJSONArray("areas");
-            if (areas.getJSONObject(0).has("pops")) {
-                popsArray = areas.getJSONObject(0).getJSONArray("pops");
-                break;
-            }
+        if (timeStringObject.getJSONArray("areas").getJSONObject(0).has("waves")) {
+            wavesArray = timeStringObject.getJSONArray("areas").getJSONObject(0).getJSONArray("waves");
         }
 
         for (int i = 0; i < timeDefinesArray.length(); i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
+            String wave = (wavesArray != null && i < wavesArray.length()) ? wavesArray.getString(i) : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i),
-                    wind
+                    wind,
+                    wave
             });
         }
         return weatherInfo;
@@ -95,7 +90,7 @@ class WeatherDataPrinter {
     // 解析した天気データをコンソールに出力
     // 各データは日付、天気、風速の順で表示されます
     public void printWeatherData(List<String[]> weatherInfo) {
-        System.out.println("日付        天気    風速"); // ヘッダー行を表示
+        System.out.println("日付        天気    風速    波の高さ"); // ヘッダー行を表示
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE); // 曜日を日本語で取得
@@ -108,25 +103,34 @@ class WeatherDataPrinter {
     // 天気データをHTMLテーブルで画像付き出力
     public void printWeatherDataAsHtml(List<String[]> weatherInfo, String filePath) {
         StringBuilder html = new StringBuilder();
-        html.append("<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n<meta charset=\"UTF-8\">\n<title>天気予報</title>\n</head>\n<body>\n");
+        html.append(
+                "<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n<meta charset=\"UTF-8\">\n<title>天気予報</title>\n</head>\n<body>\n");
         html.append("<h1>大阪の天気予報</h1>\n");
-        html.append("<table border=\"1\">\n<tr><th>日付</th><th>天気</th><th>風速</th><th>画像</th></tr>\n");
+        html.append("<table border=\"1\">\n<tr><th>日付</th><th>天気</th><th>風速</th><th>波の高さ</th><th>画像</th></tr>\n");
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             String weather = info[1];
             String imgFile = "";
-            if (weather.contains("晴")) imgFile = "hare.png";
-            else if (weather.contains("雨")) imgFile = "ame.png";
-            else if (weather.contains("曇")) imgFile = "kumori.png";
-            else if (weather.contains("雪")) imgFile = "yuki.png";
-            else imgFile = "";
+            if (weather.contains("晴"))
+                imgFile = "hare.png";
+            else if (weather.contains("雨"))
+                imgFile = "ame.png";
+            else if (weather.contains("曇"))
+                imgFile = "kumori.png";
+            else if (weather.contains("雪"))
+                imgFile = "yuki.png";
+            else
+                imgFile = "";
             html.append("<tr>");
-            html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（").append(youbi).append("）</td>");
+            html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（")
+                    .append(youbi).append("）</td>");
             html.append("<td>").append(weather).append("</td>");
             html.append("<td>").append(info[2]).append("</td>");
+            html.append("<td>").append(info[3]).append("</td>");
             if (!imgFile.isEmpty()) {
-                html.append("<td><img src='img/").append(imgFile).append("' alt='").append(weather).append("' width='40'></td>");
+                html.append("<td><img src='img/").append(imgFile).append("' alt='").append(weather)
+                        .append("' width='40'></td>");
             } else {
                 html.append("<td></td>");
             }
@@ -150,8 +154,10 @@ class WeatherDataPrinter {
         System.out.println("\n【大阪府の花粉情報】");
         for (int i = 0; i < 3; i++) {
             java.time.LocalDate date = today.plusDays(i);
-            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.JAPANESE);
-            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "）: " + pollenLevel);
+            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
+                    java.util.Locale.JAPANESE);
+            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
+                    + "）: " + pollenLevel);
         }
         System.out.println("※参考: https://www.allegra.jp/hayfever/calendar.html");
     }
