@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/* CSS Document */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid #2137ff;
+    padding: 8px;
+}
+th {
+    background-color: #7fd6ff;
+    text-align: left;
+}
