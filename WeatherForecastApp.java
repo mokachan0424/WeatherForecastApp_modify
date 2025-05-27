@@ -187,7 +187,6 @@ class WeatherDataPrinter {
         System.out.println("\n【大阪府の紫外線情報（tenki.jpより）】");
         System.out.println("本日の紫外線: " + uvLevel + "（" + uvAdvice + ")");
     }
-}
 
 // tenki.jpの内容をもとに大阪府の熱中症情報を表示するメソッド
     public static void printOsakaHeatstrokeInfo() {
@@ -209,8 +208,7 @@ class WeatherDataPrinter {
                     + "）: " + riskLevel + "（" + advice + ")");
         }
     }
-}　
-
+}
 // メイン処理クラス
 public class WeatherForecastApp {
     private static final String TARGET_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json";
