@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URISyntaxException;
+import java.net.MalformedURLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -17,9 +18,9 @@ import org.json.JSONObject;
 /**
  * 天気予報アプリ
  * このアプリケーションは、気象庁のWeb APIから大阪府の天気予報データを取得し、表示します。
- * 
+ *
  * org.jsonライブラリを使用するために、依存関係をプロジェクトに追加する必要があります。
- * 
+ *
  * @author n.katayama
  * @version 1.0
  */
@@ -69,7 +70,6 @@ class WeatherDataParser {
 
         // 降水確率情報の取得（2番目以降のtimeSeriesに"pops"がある場合）
         JSONArray popsArray = null;
-        JSONArray reliabilitiesArray = null;
         JSONArray timeSeriesArr = rootArray.getJSONObject(0).getJSONArray("timeSeries");
         for (int i = 0; i < timeSeriesArr.length(); i++) {
             JSONObject ts = timeSeriesArr.getJSONObject(i);
@@ -78,23 +78,16 @@ class WeatherDataParser {
                 popsArray = areas.getJSONObject(0).getJSONArray("pops");
                 break;
             }
-            if (areas.getJSONObject(0).has("reliabilities")) {
-                reliabilitiesArray = areas.getJSONObject(0).getJSONArray("reliabilities");
-            }
         }
 
         for (int i = 0; i < timeDefinesArray.length() && i < 7; i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             String pop = (popsArray != null && i < popsArray.length()) ? popsArray.getString(i) + "%" : "-";
-            String reliability = (reliabilitiesArray != null && i < reliabilitiesArray.length())
-                    ? reliabilitiesArray.getString(i)
-                    : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i),
                     wind,
-                    pop,
-                    reliability
+                    pop
             });
         }
         return weatherInfo;
@@ -105,15 +98,13 @@ class WeatherDataParser {
 class WeatherDataPrinter {
     // 解析した天気データをコンソールに出力
     public void printWeatherData(List<String[]> weatherInfo) {
-
-        System.out.println("日付        天気    風速    降水確率  信頼度");
+        System.out.println("日付        天気    風速    降水確率");
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             System.out.println(
-                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） "
-                            + info[1] + "    " + info[2] + "    " + info[3] + "    " + info[4]);
-
+                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） " + info[1] + "    "
+                            + info[2] + "    " + info[3]);
         }
     }
 
@@ -122,25 +113,13 @@ class WeatherDataPrinter {
         StringBuilder html = new StringBuilder();
         html.append(
                 "<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n<meta charset=\"UTF-8\">\n<title>天気予報</title>\n</head>\n<body>\n");
-        html.append("<h1>大阪の天気予報</h1>\n");
-        html.append("<table border=\"1\">\n<tr><th>日付</th><th>天気</th><th>風速</th><th>降水確率</th><th>画像</th></tr>\n");
-        int maxDays = 7;
-        for (int i = 0; i < maxDays; i++) {
-            String[] info;
-            if (i < weatherInfo.size()) {
-                info = weatherInfo.get(i);
-            } else {
-                info = new String[] { "-", "-", "-", "-", "-" };
-            }
-            LocalDateTime dateTime = null;
-            String youbi = "-";
-            String dateStr = info[0];
-            try {
-                dateTime = LocalDateTime.parse(dateStr, DateTimeFormatter.ISO_DATE_TIME);
-                youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
-            } catch (Exception e) {
-                // 日付が不正な場合はそのまま
-            }
+        html.append("<h1>大阪の天気予報（今日から3日間）</h1>\n");
+        html.append("<table border=\"1\">\n<tr><th>日付</th><th>天気</th><th>風速</th><th>画像</th></tr>\n");
+        int days = Math.min(3, weatherInfo.size());
+        for (int i = 0; i < days; i++) {
+            String[] info = weatherInfo.get(i);
+            LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
+            String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             String weather = info[1];
             String imgFile = "";
             if (weather.contains("晴"))
@@ -149,18 +128,14 @@ class WeatherDataPrinter {
                 imgFile = "ame.png";
             else if (weather.contains("曇"))
                 imgFile = "kumori.png";
+
             else
                 imgFile = "";
             html.append("<tr>");
-            if (dateTime != null) {
-                html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（")
-                        .append(youbi).append("）</td>");
-            } else {
-                html.append("<td>-</td>");
-            }
+            html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（")
+                    .append(youbi).append("）</td>");
             html.append("<td>").append(weather).append("</td>");
             html.append("<td>").append(info[2]).append("</td>");
-            html.append("<td>").append(info[3]).append("</td>");
             if (!imgFile.isEmpty()) {
                 html.append("<td><img src='img/").append(imgFile).append("' alt='").append(weather)
                         .append("' width='40'></td>");
@@ -177,10 +152,16 @@ class WeatherDataPrinter {
         } catch (IOException e) {
             System.out.println("HTML出力エラー: " + e.getMessage());
         }
-    };
+    }
 
     // tenki.jpの内容をもとに大阪府の紫外線情報を表示するメソッド
     public static void printOsakaUVInfo() {
+        try {
+            URL url = new URL("https://tenki.jp/");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        // https://tenki.jp/heatstroke/
         // 2025年5月27日現在の例: tenki.jpより「強い:紫外線対策は必須、外では日かげに」
         String uvLevel = "強い";
         String uvAdvice = "紫外線対策は必須、外では日かげに";
@@ -188,8 +169,13 @@ class WeatherDataPrinter {
         System.out.println("本日の紫外線: " + uvLevel + "（" + uvAdvice + ")");
     }
 
-// tenki.jpの内容をもとに大阪府の熱中症情報を表示するメソッド
+    // tenki.jpの内容をもとに大阪府の熱中症情報を表示するメソッド
     public static void printOsakaHeatstrokeInfo() {
+        try {
+            URL url = new URL("https://tenki.jp/");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         java.time.LocalDate today = java.time.LocalDate.now();
         String[] riskLevels = { "警戒", "厳重警戒", "注意" };
         String[] advices = {
@@ -209,6 +195,7 @@ class WeatherDataPrinter {
         }
     }
 }
+
 // メイン処理クラス
 public class WeatherForecastApp {
     private static final String TARGET_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json";
@@ -224,6 +211,10 @@ public class WeatherForecastApp {
             printer.printWeatherData(weatherInfo);
             // HTML出力
             printer.printWeatherDataAsHtml(weatherInfo, "weather.html");
+            // 紫外線情報出力
+            WeatherDataPrinter.printOsakaUVInfo();
+            // 熱中症情報出力
+            WeatherDataPrinter.printOsakaHeatstrokeInfo();
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage());
         }
