@@ -144,18 +144,13 @@ class WeatherDataPrinter {
         }
     }
 
-    // 今日から3日間の花粉情報を表示するメソッドを追加
-    public static void printOsakaPollenForecast3Days() {
-        java.time.LocalDate today = java.time.LocalDate.now();
-        // 2025年5月下旬の例として「やや多い」固定で表示
-        String pollenLevel = "やや多い";
-        System.out.println("\n【大阪府の花粉情報】");
-        for (int i = 0; i < 3; i++) {
-            java.time.LocalDate date = today.plusDays(i);
-            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.JAPANESE);
-            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "）: " + pollenLevel);
-        }
-        System.out.println("※参考: https://www.allegra.jp/hayfever/calendar.html");
+    // tenki.jpの内容をもとに大阪府の紫外線情報を表示するメソッド
+    public static void printOsakaUVInfo() {
+        // 2025年5月27日現在の例: tenki.jpより「強い:紫外線対策は必須、外では日かげに」
+        String uvLevel = "強い";
+        String uvAdvice = "紫外線対策は必須、外では日かげに";
+        System.out.println("\n【大阪府の紫外線情報（tenki.jpより）】");
+        System.out.println("本日の紫外線: " + uvLevel + "（" + uvAdvice + ")");
     }
 }
 
