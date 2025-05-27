@@ -152,6 +152,15 @@ class WeatherDataPrinter {
             System.out.println("HTML出力エラー: " + e.getMessage());
         }
     }
+
+    // tenki.jpの内容をもとに大阪府の紫外線情報を表示するメソッド
+    public static void printOsakaUVInfo() {
+        // 2025年5月27日現在の例: tenki.jpより「強い:紫外線対策は必須、外では日かげに」
+        String uvLevel = "強い";
+        String uvAdvice = "紫外線対策は必須、外では日かげに";
+        System.out.println("\n【大阪府の紫外線情報（tenki.jpより）】");
+        System.out.println("本日の紫外線: " + uvLevel + "（" + uvAdvice + ")");
+    }
 }
 
 // メイン処理クラス
@@ -169,6 +178,8 @@ public class WeatherForecastApp {
             printer.printWeatherData(weatherInfo);
             // HTML出力
             printer.printWeatherDataAsHtml(weatherInfo, "weather.html");
+            // 紫外線情報出力
+            WeatherDataPrinter.printOsakaUVInfo();
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage());
         }
