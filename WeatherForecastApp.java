@@ -86,7 +86,9 @@ class WeatherDataParser {
         for (int i = 0; i < timeDefinesArray.length() && i < 7; i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             String pop = (popsArray != null && i < popsArray.length()) ? popsArray.getString(i) + "%" : "-";
-            String reliability = (reliabilitiesArray != null && i < reliabilitiesArray.length()) ? reliabilitiesArray.getString(i) : "-";
+            String reliability = (reliabilitiesArray != null && i < reliabilitiesArray.length())
+                    ? reliabilitiesArray.getString(i)
+                    : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i),
@@ -121,10 +123,24 @@ class WeatherDataPrinter {
         html.append(
                 "<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n<meta charset=\"UTF-8\">\n<title>天気予報</title>\n</head>\n<body>\n");
         html.append("<h1>大阪の天気予報</h1>\n");
-        html.append("<table border=\"1\">\n<tr><th>日付</th><th>天気</th><th>風速</th><th>画像</th></tr>\n");
-        for (String[] info : weatherInfo) {
-            LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
-            String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
+        html.append("<table border=\"1\">\n<tr><th>日付</th><th>天気</th><th>風速</th><th>降水確率</th><th>画像</th></tr>\n");
+        int maxDays = 7;
+        for (int i = 0; i < maxDays; i++) {
+            String[] info;
+            if (i < weatherInfo.size()) {
+                info = weatherInfo.get(i);
+            } else {
+                info = new String[] { "-", "-", "-", "-", "-" };
+            }
+            LocalDateTime dateTime = null;
+            String youbi = "-";
+            String dateStr = info[0];
+            try {
+                dateTime = LocalDateTime.parse(dateStr, DateTimeFormatter.ISO_DATE_TIME);
+                youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
+            } catch (Exception e) {
+                // 日付が不正な場合はそのまま
+            }
             String weather = info[1];
             String imgFile = "";
             if (weather.contains("晴"))
@@ -133,14 +149,18 @@ class WeatherDataPrinter {
                 imgFile = "ame.png";
             else if (weather.contains("曇"))
                 imgFile = "kumori.png";
-
             else
                 imgFile = "";
             html.append("<tr>");
-            html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（")
-                    .append(youbi).append("）</td>");
+            if (dateTime != null) {
+                html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（")
+                        .append(youbi).append("）</td>");
+            } else {
+                html.append("<td>-</td>");
+            }
             html.append("<td>").append(weather).append("</td>");
             html.append("<td>").append(info[2]).append("</td>");
+            html.append("<td>").append(info[3]).append("</td>");
             if (!imgFile.isEmpty()) {
                 html.append("<td><img src='img/").append(imgFile).append("' alt='").append(weather)
                         .append("' width='40'></td>");
@@ -157,8 +177,8 @@ class WeatherDataPrinter {
         } catch (IOException e) {
             System.out.println("HTML出力エラー: " + e.getMessage());
         }
-    }
-;
+    };
+
     // tenki.jpの内容をもとに大阪府の紫外線情報を表示するメソッド
     public static void printOsakaUVInfo() {
         // 2025年5月27日現在の例: tenki.jpより「強い:紫外線対策は必須、外では日かげに」
@@ -184,8 +204,6 @@ public class WeatherForecastApp {
             printer.printWeatherData(weatherInfo);
             // HTML出力
             printer.printWeatherDataAsHtml(weatherInfo, "weather.html");
-            // 今日から3日間の花粉情報を表示
-            WeatherDataPrinter.printOsakaPollenForecast3Days();
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage());
         }
