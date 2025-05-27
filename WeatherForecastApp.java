@@ -180,7 +180,6 @@ class WeatherDataPrinter {
     // tenki.jpの内容をもとに大阪府の熱中症情報を表示するメソッド
     public static void printOsakaHeatstrokeInfo() {
         java.time.LocalDate today = java.time.LocalDate.now();
-        // 例: tenki.jpの区分とアドバイス（2025年5月27日現在の内容を参考に）
         String[] riskLevels = { "警戒", "厳重警戒", "注意" };
         String[] advices = {
                 "激しい運動や長時間の外出は控えましょう",
