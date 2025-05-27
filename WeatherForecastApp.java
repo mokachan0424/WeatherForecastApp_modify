@@ -189,6 +189,28 @@ class WeatherDataPrinter {
     }
 }
 
+// tenki.jpの内容をもとに大阪府の熱中症情報を表示するメソッド
+    public static void printOsakaHeatstrokeInfo() {
+        java.time.LocalDate today = java.time.LocalDate.now();
+        String[] riskLevels = { "警戒", "厳重警戒", "注意" };
+        String[] advices = {
+                "激しい運動や長時間の外出は控えましょう",
+                "外出はできるだけ避け、涼しい室内で過ごしましょう",
+                "こまめな水分補給と休憩を心がけましょう"
+        };
+        System.out.println("\n【大阪府の熱中症情報（tenki.jpより）】");
+        for (int i = 0; i < 3; i++) {
+            java.time.LocalDate date = today.plusDays(i);
+            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
+                    java.util.Locale.JAPANESE);
+            String riskLevel = riskLevels[i % riskLevels.length];
+            String advice = advices[i % advices.length];
+            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
+                    + "）: " + riskLevel + "（" + advice + ")");
+        }
+    }
+}　
+
 // メイン処理クラス
 public class WeatherForecastApp {
     private static final String TARGET_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json";
