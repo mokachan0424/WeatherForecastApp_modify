@@ -79,7 +79,7 @@ class WeatherDataParser {
             }
         }
 
-        for (int i = 0; i < timeDefinesArray.length()&& i<7; i++) {
+        for (int i = 0; i < timeDefinesArray.length() && i < 7; i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             String pop = (popsArray != null && i < popsArray.length()) ? popsArray.getString(i) + "%" : "-";
             weatherInfo.add(new String[] {
@@ -121,22 +121,15 @@ class WeatherDataPrinter {
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             String weather = info[1];
             String imgFile = "";
-<<<<<<< HEAD
             if (weather.contains("晴"))
                 imgFile = "hare.png";
             else if (weather.contains("雨"))
                 imgFile = "ame.png";
             else if (weather.contains("曇"))
                 imgFile = "kumori.png";
-            else if (weather.contains("雪"))
-                imgFile = "yuki.png";
-=======
-            if (weather.contains("晴")) imgFile = "hare.png";
-            else if (weather.contains("雨")) imgFile = "ame.png";
-            else if (weather.contains("曇")) imgFile = "kumori.png";
-        
-            else imgFile = "";
->>>>>>> 0847ebdd40079e6cf5db17057d304574574b189e
+
+            else
+                imgFile = "";
             html.append("<tr>");
             html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（")
                     .append(youbi).append("）</td>");
@@ -159,52 +152,6 @@ class WeatherDataPrinter {
             System.out.println("HTML出力エラー: " + e.getMessage());
         }
     }
-
-    // tenki.jpの内容をもとに大阪府の紫外線情報を表示するメソッド
-    public static void printOsakaUVInfo() {
-        // 2025年5月22日現在の例: tenki.jpより「強い:紫外線対策は必須、外では日かげに」
-        String uvLevel = "強い";
-        String uvAdvice = "紫外線対策は必須、外では日かげに";
-        System.out.println("\n【大阪府の紫外線情報（tenki.jpより）】");
-        System.out.println("本日の紫外線: " + uvLevel + "（" + uvAdvice + ")");
-    }
-
-    // 今日から3日間の花粉情報を表示するメソッドを追加
-    public static void printOsakaPollenForecast3Days() {
-        java.time.LocalDate today = java.time.LocalDate.now();
-        // 日ごとに花粉量を変化させて表示
-        String[] pollenLevels = { "多い", "やや多い", "少ない" };
-        System.out.println("\n【大阪府の花粉情報】");
-        for (int i = 0; i < 3; i++) {
-            java.time.LocalDate date = today.plusDays(i);
-            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
-                    java.util.Locale.JAPANESE);
-            String pollenLevel = pollenLevels[i % pollenLevels.length];
-            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
-                    + "）: " + pollenLevel);
-        }
-    }
-
-    // tenki.jpの内容をもとに大阪府の熱中症情報を表示するメソッド
-    public static void printOsakaHeatstrokeInfo() {
-        java.time.LocalDate today = java.time.LocalDate.now();
-        String[] riskLevels = { "警戒", "厳重警戒", "注意" };
-        String[] advices = {
-                "激しい運動や長時間の外出は控えましょう",
-                "外出はできるだけ避け、涼しい室内で過ごしましょう",
-                "こまめな水分補給と休憩を心がけましょう"
-        };
-        System.out.println("\n【大阪府の熱中症情報（tenki.jpより）】");
-        for (int i = 0; i < 3; i++) {
-            java.time.LocalDate date = today.plusDays(i);
-            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
-                    java.util.Locale.JAPANESE);
-            String riskLevel = riskLevels[i % riskLevels.length];
-            String advice = advices[i % advices.length];
-            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
-                    + "）: " + riskLevel + "（" + advice + ")");
-        }
-    }
 }
 
 // メイン処理クラス
@@ -225,12 +172,5 @@ public class WeatherForecastApp {
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage());
         }
-
-        // 大阪府の紫外線情報を表示
-        WeatherDataPrinter.printOsakaUVInfo();
-        // 大阪府の熱中症情報を表示
-        WeatherDataPrinter.printOsakaHeatstrokeInfo();
-        // 大阪府の花粉情報を表示
-        WeatherDataPrinter.printOsakaPollenForecast3Days();
     }
 }
