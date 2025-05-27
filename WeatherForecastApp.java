@@ -79,7 +79,7 @@ class WeatherDataParser {
             }
         }
 
-        for (int i = 0; i < timeDefinesArray.length(); i++) {
+        for (int i = 0; i < timeDefinesArray.length()&& i<7; i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             String pop = (popsArray != null && i < popsArray.length()) ? popsArray.getString(i) + "%" : "-";
             weatherInfo.add(new String[] {
@@ -121,6 +121,7 @@ class WeatherDataPrinter {
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             String weather = info[1];
             String imgFile = "";
+<<<<<<< HEAD
             if (weather.contains("晴"))
                 imgFile = "hare.png";
             else if (weather.contains("雨"))
@@ -129,6 +130,13 @@ class WeatherDataPrinter {
                 imgFile = "kumori.png";
             else if (weather.contains("雪"))
                 imgFile = "yuki.png";
+=======
+            if (weather.contains("晴")) imgFile = "hare.png";
+            else if (weather.contains("雨")) imgFile = "ame.png";
+            else if (weather.contains("曇")) imgFile = "kumori.png";
+        
+            else imgFile = "";
+>>>>>>> 0847ebdd40079e6cf5db17057d304574574b189e
             html.append("<tr>");
             html.append("<td>").append(dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).append("（")
                     .append(youbi).append("）</td>");
