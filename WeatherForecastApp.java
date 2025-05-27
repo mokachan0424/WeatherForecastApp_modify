@@ -75,16 +75,23 @@ class WeatherDataParser {
         JSONArray popsArray = popObject.getJSONArray("areas")
                 .getJSONObject(0).getJSONArray("pops");
 
+        JSONArray reliabilitiesArray = null;
+        if (weatherObject.getJSONArray("areas").getJSONObject(0).has("reliabilities")) {
+            reliabilitiesArray = weatherObject.getJSONArray("areas").getJSONObject(0).getJSONArray("reliabilities");
+        }
+
         for (int i = 0; i < timeDefinesArray.length(); i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             String pop = (i < popsArray.length() && !popsArray.isNull(i) && !popsArray.getString(i).isEmpty())
                     ? popsArray.getString(i) + "%" : "--";
-
+            String reliability = (reliabilitiesArray != null && i < reliabilitiesArray.length() && !reliabilitiesArray.isNull(i))
+                    ? reliabilitiesArray.getString(i) : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i),
                     wind,
-                    pop
+                    pop,
+                    reliability
             });
         }
         return weatherInfo;
@@ -95,13 +102,13 @@ class WeatherDataParser {
 class WeatherDataPrinter {
     // 解析した天気データをコンソールに出力
     public void printWeatherData(List<String[]> weatherInfo) {
-        System.out.println("日付        天気    風速    降水確率");
+        System.out.println("日付        天気    風速    降水確率  信頼度");
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE);
             System.out.println(
                     dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） "
-                    + info[1] + "    " + info[2] + "    " + info[3]);
+                    + info[1] + "    " + info[2] + "    " + info[3] + "    " + info[4]);
         }
     }
 }
