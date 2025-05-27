@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URISyntaxException;
+import java.net.MalformedURLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -155,6 +156,12 @@ class WeatherDataPrinter {
 
     // tenki.jpの内容をもとに大阪府の紫外線情報を表示するメソッド
     public static void printOsakaUVInfo() {
+        try {
+            URL url = new URL("https://tenki.jp/heatstroke/");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+         }
+        // https://tenki.jp/heatstroke/
         // 2025年5月27日現在の例: tenki.jpより「強い:紫外線対策は必須、外では日かげに」
         String uvLevel = "強い";
         String uvAdvice = "紫外線対策は必須、外では日かげに";
@@ -164,6 +171,11 @@ class WeatherDataPrinter {
 
     // tenki.jpの内容をもとに大阪府の熱中症情報を表示するメソッド
     public static void printOsakaHeatstrokeInfo() {
+        try {
+            URL url = new URL("https://tenki.jp/heatstroke/");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         java.time.LocalDate today = java.time.LocalDate.now();
         String[] riskLevels = { "警戒", "厳重警戒", "注意" };
         String[] advices = {
