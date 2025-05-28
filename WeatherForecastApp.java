@@ -86,7 +86,9 @@ class WeatherDataParser {
         for (int i = 0; i < timeDefinesArray.length() && i < 7; i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             String pop = (popsArray != null && i < popsArray.length()) ? popsArray.getString(i) + "%" : "-";
-            String reliability = (reliabilitiesArray != null && i < reliabilitiesArray.length()) ? reliabilitiesArray.getString(i) : "-";
+            String reliability = (reliabilitiesArray != null && i < reliabilitiesArray.length())
+                    ? reliabilitiesArray.getString(i)
+                    : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i),
