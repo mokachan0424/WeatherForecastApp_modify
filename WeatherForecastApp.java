@@ -156,11 +156,7 @@ class WeatherDataPrinter {
 
     // tenki.jpの内容をもとに大阪府の紫外線情報を表示するメソッド
     public static void printOsakaUVInfo() {
-        try {
-            URL url = new URL("https://tenki.jp/heatstroke/");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-         }
+        // URL url = new URL("https://tenki.jp/");
         // https://tenki.jp/heatstroke/
         // 2025年5月27日現在の例: tenki.jpより「強い:紫外線対策は必須、外では日かげに」
         String uvLevel = "強い";
@@ -171,11 +167,7 @@ class WeatherDataPrinter {
 
     // tenki.jpの内容をもとに大阪府の熱中症情報を表示するメソッド
     public static void printOsakaHeatstrokeInfo() {
-        try {
-            URL url = new URL("https://tenki.jp/heatstroke/");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        // URL url = new URL("https://tenki.jp/");
         java.time.LocalDate today = java.time.LocalDate.now();
         String[] riskLevels = { "警戒", "厳重警戒", "注意" };
         String[] advices = {
@@ -192,6 +184,36 @@ class WeatherDataPrinter {
             String advice = advices[i % advices.length];
             System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
                     + "）: " + riskLevel + "（" + advice + ")");
+        }
+    }
+
+    // tenki.jpの内容をもとに大阪府の花粉症情報を表示するメソッド
+    public static void printOsakaPollenInfo() {
+        // 2025年5月28日現在の例: tenki.jpより
+        String[] levels = { "少ない", "やや多い", "非常に多い" };
+        String[] advices = {
+            "花粉症の方はマスクを着用しましょう",
+            "外出時はメガネや帽子も活用しましょう",
+            "洗濯物の外干しは控えめにしましょう"
+        };
+        System.out.println("\n【大阪府の花粉症情報（tenki.jpより）】");
+        System.out.println("本日の花粉: " + levels[0] + "（" + advices[0] + ")");
+    }
+
+    // tenki.jpの内容をもとに大阪府の花粉症情報（3日分）を表示するメソッド
+    public static void printOsakaPollenInfo3Days() {
+        java.time.LocalDate today = java.time.LocalDate.now();
+        String[] levels = { "少ない", "やや多い", "非常に多い" };
+        String[] advices = {
+            "花粉症の方はマスクを着用しましょう",
+            "外出時はメガネや帽子も活用しましょう",
+            "洗濯物の外干しは控えめにしましょう"
+        };
+        System.out.println("\n【大阪府の花粉症情報（tenki.jpより・3日分）】");
+        for (int day = 0; day < 3; day++) {
+            java.time.LocalDate date = today.plusDays(day);
+            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.JAPANESE);
+            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "）: " + levels[day % levels.length] + "（" + advices[day % advices.length] + ")");
         }
     }
 }
@@ -215,6 +237,10 @@ public class WeatherForecastApp {
             WeatherDataPrinter.printOsakaUVInfo();
             // 熱中症情報出力
             WeatherDataPrinter.printOsakaHeatstrokeInfo();
+            // 花粉症情報出力
+            WeatherDataPrinter.printOsakaPollenInfo();
+            // 3日分の花粉症情報出力
+            WeatherDataPrinter.printOsakaPollenInfo3Days();
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage());
         }
