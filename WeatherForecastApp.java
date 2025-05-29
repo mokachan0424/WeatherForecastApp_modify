@@ -124,7 +124,6 @@ class WeatherDataPrinter {
             else if (weather.contains("曇"))
                 imgFile = "kumori.png";
 
-
             else
                 imgFile = "";
             html.append("<tr>");
@@ -186,7 +185,6 @@ class WeatherDataPrinter {
             String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
                     java.util.Locale.JAPANESE);
 
-
             String riskLevel = riskLevels[i % riskLevels.length];
             String advice = advices[i % advices.length];
             System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
@@ -221,3 +219,6 @@ public class WeatherForecastApp {
         }
     }
 }
+
+
+
