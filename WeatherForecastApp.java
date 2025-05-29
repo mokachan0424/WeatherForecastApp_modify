@@ -16,7 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * 天気予報アプリ
+ * 天気予報アプリa
  * このアプリケーションは、気象庁のWeb APIから大阪府の天気予報データを取得し、表示します。
  *
  * org.jsonライブラリを使用するために、依存関係をプロジェクトに追加する必要があります。
