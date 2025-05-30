@@ -6,8 +6,144 @@
     <style>
         body {
             background-color: #ffeece;
-            background-image: url(img/空_ヘッダー画像.jpg);
-            background-repeat: repeat-y;
+            background-image: url("img/空_ヘッダー画像.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 200px;
+            background-position: top center;
+            font-family: 'Segoe UI', 'Hiragino Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            border-radius: 0 0 32px 32px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.10);
+            padding: 40px 0 20px 0;
+            margin-bottom: 32px;
+            text-align: center;
+            position: relative;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #header h1 {
+            font-size: 50px;
+            color: #247cffb9;
+            letter-spacing: 15px;
+            margin-bottom: em;
+            text-shadow: 2px 2px 8px #fff7e6, 0 2px 8px #a1422744;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #header2 p {
+            font-size: 1.3em;
+            color: #333;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-shadow: 1px 1px 6px #fff7e6;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 32px auto 24px auto;
+            font-size: 1.2em;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            color: #222;
+            border-radius: 18px;
+            padding: 10px 0 10px 0;
+            max-width: 600px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+            min-height: unset;
+        }
+
+        #contents h2 {
+            font-size: 1.2em;
+            font-weight: 900;
+            color: #222;
+            letter-spacing: 0.05em;
+            text-shadow: 1px 1px 4px #fff7e6;
+        }
+
+        #contents table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav li {
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav li:hover {
+            transform: translateY(-4px) scale(1.08);
+        }
+
+        nav a {
+            display: block;
+            padding: 12px 28px;
+            background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 18px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        nav a:hover {
+            background: linear-gradient(90deg, #fcb69f 0%, #ffecd2 100%);
+            color: #1b5e20;
+        }
+
+        @media (max-width: 600px) {
+            #header h1 {
+                font-size: 2em;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 1em;
+                padding: 8px 12px;
+            }
         }
 
         h1,

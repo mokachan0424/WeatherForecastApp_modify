@@ -5,66 +5,91 @@
     <meta charset="UTF-8">
     <title>紫外線情報</title>
     <style>
+        #header {
+            background-color: #aa71e0;
+            font-size: 30px;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
         body {
-            background-color: #f0f8ff;
+            background-color: #dec9f1;
         }
 
         table {
             border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
         }
 
         th,
         td {
-            border: 1px solid #888;
+            border: 1px solid #555353;
             padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
         }
 
         th {
-            background: #e0e0ff;
+            background: #46464e;
+            color: white;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>大阪の紫外線情報</h1>
+        <div id="header">
+            <h1>紫外線情報</h1>
+            <div id="header2">
+                <p>大阪の紫外線情報</p>
+            </div>
     </header>
     <main>
-        <h2>紫外線予測（1週間分）</h2>
-        <table>
-            <tr>
-                <th>日付</th>
-                <th>紫外線情報</th>
-            </tr>
-            <tr>
-                <td>2025/05/29（木）</td>
-                <td>強い（紫外線対策は必須、外では日かげに）</td>
-            </tr>
-            <tr>
-                <td>2025/05/30（金）</td>
-                <td>強い（紫外線対策は必須、外では日かげに）</td>
-            </tr>
-            <tr>
-                <td>2025/05/31（土）</td>
-                <td>強い（紫外線対策は必須、外では日かげに）</td>
-            </tr>
-            <tr>
-                <td>2025/06/01（日）</td>
-                <td>強い（紫外線対策は必須、外では日かげに）</td>
-            </tr>
-            <tr>
-                <td>2025/06/02（月）</td>
-                <td>強い（紫外線対策は必須、外では日かげに）</td>
-            </tr>
-            <tr>
-                <td>2025/06/03（火）</td>
-                <td>強い（紫外線対策は必須、外では日かげに）</td>
-            </tr>
-            <tr>
-                <td>2025/06/04（水）</td>
-                <td>強い（紫外線対策は必須、外では日かげに）</td>
-            </tr>
-        </table>
+        <div id="contents">
+            <h2>紫外線予測（1週間分）</h2>
+            <table border="1">
+                <tr>
+                    <th>日付</th>
+                    <th>紫外線情報</th>
+                </tr>
+                <tr>
+                    <td>2025/05/29（木）</td>
+                    <td>強い（紫外線対策は必須、外では日かげに）</td>
+                </tr>
+                <tr>
+                    <td>2025/05/30（金）</td>
+                    <td>強い（紫外線対策は必須、外では日かげに）</td>
+                </tr>
+                <tr>
+                    <td>2025/05/31（土）</td>
+                    <td>強い（紫外線対策は必須、外では日かげに）</td>
+                </tr>
+                <tr>
+                    <td>2025/06/01（日）</td>
+                    <td>強い（紫外線対策は必須、外では日かげに）</td>
+                </tr>
+                <tr>
+                    <td>2025/06/02（月）</td>
+                    <td>強い（紫外線対策は必須、外では日かげに）</td>
+                </tr>
+                <tr>
+                    <td>2025/06/03（火）</td>
+                    <td>強い（紫外線対策は必須、外では日かげに）</td>
+                </tr>
+                <tr>
+                    <td>2025/06/04（水）</td>
+                    <td>強い（紫外線対策は必須、外では日かげに）</td>
+                </tr>
+            </table>
+        </div>
     </main>
 </body>
 
