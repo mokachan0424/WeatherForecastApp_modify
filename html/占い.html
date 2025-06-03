@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>今日の星座占いランキング</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            font-family: 'Segoe UI', 'Hiragino Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #header {
+            text-align: center;
+            padding: 32px 0 16px 0;
+            color: #fff;
+            font-size: 2.2em;
+            letter-spacing: 0.1em;
+            text-shadow: 2px 2px 8px #fda08588;
+        }
+        #ranking-box {
+            background: #fffbe7;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px #f6d36544;
+            max-width: 480px;
+            margin: 24px auto;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        ol {
+            text-align: left;
+            display: inline-block;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 0;
+            padding: 0 0 0 1.2em;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">今日の星座占いランキング</div>
+    <div id="ranking-box">
+        <script>
+            // 12星座
+            const zodiac = [
+                'おひつじ座','おうし座','ふたご座','かに座','しし座','おとめ座','てんびん座','さそり座','いて座','やぎ座','みずがめ座','うお座'
+            ];
+            // 日付ごとにランダムなランキングを生成
+            function seededRandom(seed) {
+                let x = Math.sin(seed) * 10000;
+                return x - Math.floor(x);
+            }
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = (today.getMonth() + 1).toString().padStart(2, '0');
+            const dd = today.getDate().toString().padStart(2, '0');
+            const seed = parseInt(yyyy+mm+dd);
+            let zodiacRank = zodiac.map((z, i) => ({name: z, rank: i+1}));
+            for(let i=zodiacRank.length-1; i>0; i--) {
+                const j = Math.floor(seededRandom(seed+i)* (i+1));
+                [zodiacRank[i], zodiacRank[j]] = [zodiacRank[j], zodiacRank[i]];
+            }
+            // 昇順で表示
+            let html = '<ol>';
+            for(let i=0;i<zodiacRank.length;i++) {
+                html += `<li>${i+1}位：${zodiacRank[i].name}</li>`;
+            }
+            html += '</ol>';
+            document.write(html);
+        </script>
+    </div>
+</body>
+</html>
