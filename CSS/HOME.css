@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/* CSS Document */
+body {
+    margin: 20px auto;
+    width: 1280px;
+}
+header h1{
+    font-size: 90px;
+    color: rgba(248, 248, 248, 0.863);}
+    p{
+    text-align: center;
+    width: 300px;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.863);
+
+}
+header h2 {
+    width: 200px;
+    color: rgb(77, 89, 100);
+    text-align: center;
+    margin: 0cqmax 0px 10px;
+    padding: 10px;
+}
