@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>近畿地方 都道府県選択</title>
+    <link rel="stylesheet" href="../CSS/HOME.css">
+    <style>
+        body {
+            background: #ffeece;
+            font-family: 'Segoe UI', 'Hiragino Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            border-radius: 32px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.10);
+            padding: 40px 0 20px 0;
+            margin: 32px auto 24px auto;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        #header h1 {
+            font-size: 2.2em;
+            color: #247cffb9;
+            letter-spacing: 10px;
+            text-shadow: 2px 2px 8px #fff7e6, 0 2px 8px #a1422744;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 0 auto 24px auto;
+            font-size: 1.2em;
+            font-weight: 900;
+            color: #222;
+            border-radius: 18px;
+            padding: 20px 0 20px 0;
+            max-width: 600px;
+            background: #fff;
+            box-shadow: 0 2px 8px #7ec6e644;
+        }
+
+        .pref-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px 32px;
+            margin: 24px auto 0 auto;
+            max-width: 500px;
+        }
+
+        .pref-btn {
+            background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+            color: #a14227;
+            border: 2px solid #f6d365;
+            border-radius: 14px;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 18px 32px;
+            margin: 0 0 0 0;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #f6d36544;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .pref-btn:hover {
+            background: #ffe0b2;
+            color: #d95c00;
+        }
+
+        @media (max-width: 600px) {
+
+            #header,
+            #contents,
+            .pref-list {
+                max-width: 98vw;
+            }
+
+            .pref-btn {
+                font-size: 1em;
+                padding: 12px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <h1>近畿地方</h1>
+        <div style="font-size:1.1em; color:#333; margin-top:8px;">都道府県を選択してください</div>
+    </div>
+    <div id="contents">
+        <div class="pref-list">
+            <button class="pref-btn" onclick="location.href='../weather.html'">大阪府</button>
+            <button class="pref-btn" onclick="location.href='../weather京都.html'">兵庫県</button>
+            <button class="pref-btn" onclick="location.href='../weather三重.html'">京都府</button>
+            <button class="pref-btn" onclick="location.href='../weather滋賀.html'">滋賀県</button>
+            <button class="pref-btn" onclick="location.href='../weather奈良.html'">奈良県</button>
+            <button class="pref-btn" onclick="location.href='../weather兵庫.html'">和歌山県</button>
+            <button class="pref-btn" onclick="location.href='../weather和歌山.html'">三重県</button>
+        </div>
+        <div style="margin-top:24px; font-size:0.95em; color:#555;">※未実装の都道府県は今後追加予定です。</div>
+    </div>
+</body>
+
+</html>
