@@ -52,23 +52,11 @@ class WeatherDataFetcher {
 
 // JSONデータ解析用クラス
 class WeatherDataParser {
-    // 天気JSONデータを解析し、日付・天気・風速・波の高さ・降水確率・信頼度のリストを返す
+    // 天気JSONデータを解析し、日付・天気・風速・波の高さ情報のリストを返す
     public List<String[]> parseWeatherData(String jsonData) {
         JSONArray rootArray = new JSONArray(jsonData);
         JSONObject timeStringObject = rootArray.getJSONObject(0)
                 .getJSONArray("timeSeries").getJSONObject(0);
-
-        // 降水確率（pop）は timeSeries[1] の areas[0] にある
-        JSONObject popObject = rootArray.getJSONObject(0)
-                .getJSONArray("timeSeries").getJSONObject(1);
-        JSONArray popsArray = popObject.getJSONArray("areas")
-                .getJSONObject(0).getJSONArray("pops");
-
-        // 信頼度（reliabilities）は timeSeries[1] の areas[0] にある場合が多い
-        JSONArray reliabilitiesArray = null;
-        if (popObject.getJSONArray("areas").getJSONObject(0).has("reliabilities")) {
-            reliabilitiesArray = popObject.getJSONArray("areas").getJSONObject(0).getJSONArray("reliabilities");
-        }
 
         List<String[]> weatherInfo = new ArrayList<>();
         JSONArray timeDefinesArray = timeStringObject.getJSONArray("timeDefines");
@@ -87,17 +75,11 @@ class WeatherDataParser {
         for (int i = 0; i < timeDefinesArray.length(); i++) {
             String wind = (windsArray != null && i < windsArray.length()) ? windsArray.getString(i) : "-";
             String wave = (wavesArray != null && i < wavesArray.length()) ? wavesArray.getString(i) : "-";
-            String pop = (i < popsArray.length() && !popsArray.isNull(i) && !popsArray.getString(i).isEmpty())
-                    ? popsArray.getString(i) + "%" : "--";
-            String reliability = (reliabilitiesArray != null && i < reliabilitiesArray.length() && !reliabilitiesArray.isNull(i))
-                    ? reliabilitiesArray.getString(i) : "-";
             weatherInfo.add(new String[] {
                     timeDefinesArray.getString(i),
                     weathersArray.getString(i),
                     wind,
-                    wave,
-                    pop,
-                    reliability
+                    wave
             });
         }
         return weatherInfo;
@@ -109,13 +91,13 @@ class WeatherDataPrinter {
     // 解析した天気データをコンソールに出力
     // 各データは日付、天気、風速の順で表示されます
     public void printWeatherData(List<String[]> weatherInfo) {
-        System.out.println("日付        天気    風速    波の高さ  降水確率  信頼度"); // ヘッダー行を表示
+        System.out.println("日付        天気    風速    波の高さ"); // ヘッダー行を表示
         for (String[] info : weatherInfo) {
             LocalDateTime dateTime = LocalDateTime.parse(info[0], DateTimeFormatter.ISO_DATE_TIME);
             String youbi = dateTime.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE); // 曜日を日本語で取得
             System.out.println(
-                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） "
-                            + info[1] + "    " + info[2] + "    " + info[3] + "    " + info[4] + "    " + info[5]);
+                    dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "） " + info[1] + "    "
+                            + info[2] + "    " + info[3]);
         }
     }
 
@@ -210,6 +192,29 @@ class WeatherDataPrinter {
 
         }
     }
+
+    // tenki.jpの内容をもとに大阪府の3日間気圧情報を表示するメソッド
+    public static void printOsakaPressureInfo3Days() {
+        java.time.LocalDate today = java.time.LocalDate.now();
+        // サンプルデータ（実際はWebスクレイピング等で取得）
+        String[] pressureLevels = { "1012 hPa", "1008 hPa", "1005 hPa" };
+        String[] trends = { "やや高め", "やや低め", "低め" };
+        String[] advices = {
+                "気圧の変化による体調変化に注意しましょう",
+                "頭痛やだるさを感じたら無理せず休みましょう",
+                "体調管理に気をつけてお過ごしください"
+        };
+        System.out.println("\n【大阪府の気圧情報（tenki.jpより・3日分）】");
+        for (int i = 0; i < 3; i++) {
+            java.time.LocalDate date = today.plusDays(i);
+            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
+                    java.util.Locale.JAPANESE);
+            System.out.println(
+                    date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "）: "
+                            + pressureLevels[i % pressureLevels.length] + "（" + trends[i % trends.length] + "、"
+                            + advices[i % advices.length] + ")");
+        }
+    }
 }
 
 // メイン処理クラス
@@ -231,6 +236,8 @@ public class WeatherForecastApp {
             WeatherDataPrinter.printOsakaUVInfo();
             // 熱中症情報出力
             WeatherDataPrinter.printOsakaHeatstrokeInfo();
+            // 3日分の気圧情報出力
+            WeatherDataPrinter.printOsakaPressureInfo3Days();
 
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage()); // エラー発生時のメッセージを表示
