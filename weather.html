@@ -86,51 +86,6 @@
             margin-right: auto;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 32px;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 auto;
-            display: flex;
-            gap: 32px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        nav li {
-            transition: transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        nav li:hover {
-            transform: translateY(-4px) scale(1.08);
-        }
-
-        nav a {
-            display: block;
-            padding: 12px 28px;
-            background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
-            border-radius: 18px;
-            color: #333;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-            transition: background 0.2s, color 0.2s;
-        }
-
-        nav a:hover {
-            background: linear-gradient(90deg, #fcb69f 0%, #ffecd2 100%);
-            color: #1b5e20;
-        }
-
         @media (max-width: 600px) {
             #header h1 {
                 font-size: 2em;
@@ -162,6 +117,57 @@
                 <p>大阪の天気予報情報</p>
             </div>
         </div>
+        <div id="info-boxes"
+            style="display:flex; flex-wrap:wrap; justify-content:center; gap:18px; margin: 0 auto 18px auto; max-width:900px;">
+            <a href="html/天気予報.html" class="info-box-link" style="text-decoration:none;">
+                <div class="info-box"
+                    style="background:#f6d365; color:#fff; border-radius:14px; box-shadow:0 2px 8px #f6d36544; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em;">
+                    天気予報
+                </div>
+            </a>
+            <a href="html/紫外線情報.html" class="info-box-link" style="text-decoration:none;">
+                <div class="info-box"
+                    style="background:#aa71e0; color:#fff; border-radius:14px; box-shadow:0 2px 8px #aa71e044; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em;">
+                    紫外線情報
+                </div>
+            </a>
+            <a href="html/熱中症情報.html" class="info-box-link" style="text-decoration:none;">
+                <div class="info-box"
+                    style="background:#ff8c8c; color:#fff; border-radius:14px; box-shadow:0 2px 8px #ff8c8c44; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em;">
+                    熱中症情報
+                </div>
+            </a>
+            <a href="html/花粉情報.html" class="info-box-link" style="text-decoration:none;">
+                <div class="info-box"
+                    style="background:#f6e7a1; color:#a14227; border-radius:14px; box-shadow:0 2px 8px #f6d36544; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em;">
+                    花粉情報
+                </div>
+            </a>
+            <a href="html/気圧情報.html" class="info-box-link" style="text-decoration:none;">
+                <div class="info-box"
+                    style="background:#7ec6e6; color:#fff; border-radius:14px; box-shadow:0 2px 8px #7ec6e644; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em;">
+                    気圧情報
+                </div>
+            </a>
+            <a href="html/地震情報.html" class="info-box-link" style="text-decoration:none;">
+                <div class="info-box"
+                    style="background:#945a23; color:#fff; border-radius:14px; box-shadow:0 2px 8px #e5737344; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em;">
+                    地震情報
+                </div>
+            </a>
+            <a href="html/台風.html" class="info-box-link" style="text-decoration:none;">
+                <div class="info-box"
+                    style="background:hsl(224, 49%, 52%); color:#fff; border-radius:14px; box-shadow:0 2px 8px #4fc3f744; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em;">
+                    台風情報
+                </div>
+            </a>
+            <a href="#" id="zodiac-link-box" class="info-box-link" style="text-decoration:none;">
+                <div class="info-box"
+                    style="background:#fff; color:#a14227; border-radius:14px; box-shadow:0 2px 8px #f6d36544; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em; border:1.5px solid #f6d365;">
+                    星座占い
+                </div>
+            </a>
+        </div>
         <div id="contents">
             <h2>トピックス情報</h2>
         </div>
@@ -170,7 +176,7 @@
             <!-- 日替わりメッセージ例 -->
             <script>
                 // サンプル天気データ（日付ごとに変更可）
-                const dailyInfo = [
+                var dailyInfo = [
                     { date: '2025/05/29', weather: 'くもり', msg: '今日はくもり。薄手の長袖が快適です。傘は念のため持参を。' },
                     { date: '2025/05/30', weather: '晴れ', msg: '今日は晴れ。半袖でOK！紫外線対策も忘れずに。' },
                     { date: '2025/05/31', weather: 'くもり時々晴れ', msg: 'くもり時々晴れ。羽織りものがあると安心。' },
@@ -179,26 +185,132 @@
                     { date: '2025/06/03', weather: 'くもり一時雨', msg: 'くもり一時雨。折りたたみ傘を持って出かけましょう。' },
                     { date: '2025/06/04', weather: '晴れ', msg: '晴れ。暑さ・紫外線対策をしっかりと！' }
                 ];
-                const today = new Date();
-                const yyyy = today.getFullYear();
-                const mm = (today.getMonth() + 1).toString().padStart(2, '0');
-                const dd = today.getDate().toString().padStart(2, '0');
-                const todayStr = `${yyyy}/${mm}/${dd}`;
-                let info = dailyInfo.find(d => d.date === todayStr);
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = (today.getMonth() + 1).toString().padStart(2, '0');
+                var dd = today.getDate().toString().padStart(2, '0');
+                var todayStr = yyyy + '/' + mm + '/' + dd;
+                var info = dailyInfo.find(function (d) { return d.date === todayStr; });
                 if (!info) info = dailyInfo[0]; // データがなければ1日目を表示
-                document.write(`<div><b>今日の天気：</b>${info.weather}<br>${info.msg}</div>`);
+                document.write('<div><b>今日の天気：</b>' + info.weather + '<br>' + info.msg + '</div>');
+            </script>
+            <div id="zodiac-mini-ranking" style="margin-top:24px;"></div>
+            <script>
+                (function () {
+                    var zodiacMini = [
+                        { name: 'おひつじ座', img: 'img/おひつじ座.png' },
+                        { name: 'おうし座', img: 'img/おうし座.png' },
+                        { name: 'ふたご座', img: 'img/ふたご座.png' },
+                        { name: 'かに座', img: 'img/かに座.png' },
+                        { name: 'しし座', img: 'img/しし座.png' },
+                        { name: 'おとめ座', img: 'img/おとめ座.png' },
+                        { name: 'てんびん座', img: 'img/てんびん座.png' },
+                        { name: 'さそり座', img: 'img/さそり座.png' },
+                        { name: 'いて座', img: 'img/いて座.png' },
+                        { name: 'やぎ座', img: 'img/やぎ座.png' },
+                        { name: 'みずがめ座', img: 'img/みずがめ座.png' },
+                        { name: 'うお座', img: 'img/うお座.png' }
+                    ];
+                    function seededRandomMini(seed) {
+                        var x = Math.sin(seed) * 10000;
+                        return x - Math.floor(x);
+                    }
+                    var todayMini = new Date();
+                    var yyyyMini = todayMini.getFullYear();
+                    var mmMini = (todayMini.getMonth() + 1).toString().padStart(2, '0');
+                    var ddMini = todayMini.getDate().toString().padStart(2, '0');
+                    var seedMini = parseInt(yyyyMini + mmMini + ddMini);
+                    var zodiacRankMini = zodiacMini.map(function (z, i) { return Object.assign({}, z, { rank: i + 1 }); });
+                    for (var i = zodiacRankMini.length - 1; i > 0; i--) {
+                        var j = Math.floor(seededRandomMini(seedMini + i) * (i + 1));
+                        var temp = zodiacRankMini[i];
+                        zodiacRankMini[i] = zodiacRankMini[j];
+                        zodiacRankMini[j] = temp;
+                    }
+                    // 上位3位と最下位のみ抽出
+                    var top3Mini = zodiacRankMini.slice(0, 3);
+                    var lastMini = zodiacRankMini[zodiacRankMini.length - 1];
+                    var htmlMini = '<div style="font-size:1.1em; font-weight:bold; margin-bottom:8px; color:#a14227;">今日の星座占いランキング</div>';
+                    htmlMini += '<table style="margin:0 auto; font-size:1em; border-collapse:collapse; width:100%;">';
+                    for (var i = 0; i < top3Mini.length; i++) {
+                        htmlMini += "<tr><td style='font-weight:bold; color:#247cffb9; width:2.5em;'>" + (i + 1) + "位</td><td><img src='" + top3Mini[i].img + "' alt='" + top3Mini[i].name + "' style='width:32px; height:32px; vertical-align:middle;'></td><td style='color:#444;'>" + top3Mini[i].name + "</td></tr>";
+                    }
+                    htmlMini += "<tr><td style='font-weight:bold; color:#e57373;'>最下位</td><td><img src='" + lastMini.img + "' alt='" + lastMini.name + "' style='width:32px; height:32px; vertical-align:middle;'></td><td style='color:#444;'>" + lastMini.name + "</td></tr>";
+                    htmlMini += '</table>';
+                    document.getElementById('zodiac-mini-ranking').innerHTML = htmlMini;
+                })();
             </script>
         </div>
-        <nav>
-            <ul>
-                <li><a href="html/天気予報.html">天気情報</a></li>
-                <li><a href="html/紫外線情報.html">紫外線情報</a></li>
-                <li><a href="html/熱中症情報.html">熱中症情報</a></li>
-                <li><a href="html/花粉情報.html">花粉情報</a></li>
-                <li><a href="html/気圧情報.html">気圧情報</a></li>
-                <li><a href="#" id="zodiac-link">星座占い</a></li>
-            </ul>
-        </nav>
+        <div id="today-info"
+            style="margin: 8px auto 24px auto; font-size:1.5em; font-weight:normal; text-align:center; max-width:600px; background: #fffbe7; border-radius: 12px; box-shadow: 0 2px 8px #f6d36544; padding: 20px 24px;">
+            <!-- 日替わりメッセージ例 -->
+            <script>
+                // サンプル天気データ（日付ごとに変更可）
+                var dailyInfo = [
+                    { date: '2025/05/29', weather: 'くもり', msg: '今日はくもり。薄手の長袖が快適です。傘は念のため持参を。' },
+                    { date: '2025/05/30', weather: '晴れ', msg: '今日は晴れ。半袖でOK！紫外線対策も忘れずに。' },
+                    { date: '2025/05/31', weather: 'くもり時々晴れ', msg: 'くもり時々晴れ。羽織りものがあると安心。' },
+                    { date: '2025/06/01', weather: '晴れ', msg: '晴れ。日差しが強いので帽子や日傘を。' },
+                    { date: '2025/06/02', weather: 'くもり', msg: 'くもり。体温調節しやすい服装で。' },
+                    { date: '2025/06/03', weather: 'くもり一時雨', msg: 'くもり一時雨。折りたたみ傘を持って出かけましょう。' },
+                    { date: '2025/06/04', weather: '晴れ', msg: '晴れ。暑さ・紫外線対策をしっかりと！' }
+                ];
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = (today.getMonth() + 1).toString().padStart(2, '0');
+                var dd = today.getDate().toString().padStart(2, '0');
+                var todayStr = yyyy + '/' + mm + '/' + dd;
+                var info = dailyInfo.find(function (d) { return d.date === todayStr; });
+                if (!info) info = dailyInfo[0]; // データがなければ1日目を表示
+                document.write('<div><b>今日の天気：</b>' + info.weather + '<br>' + info.msg + '</div>');
+            </script>
+            <div id="zodiac-mini-ranking" style="margin-top:24px;"></div>
+            <script>
+                (function () {
+                    var zodiacMini = [
+                        { name: 'おひつじ座', img: 'img/おひつじ座.png' },
+                        { name: 'おうし座', img: 'img/おうし座.png' },
+                        { name: 'ふたご座', img: 'img/ふたご座.png' },
+                        { name: 'かに座', img: 'img/かに座.png' },
+                        { name: 'しし座', img: 'img/しし座.png' },
+                        { name: 'おとめ座', img: 'img/おとめ座.png' },
+                        { name: 'てんびん座', img: 'img/てんびん座.png' },
+                        { name: 'さそり座', img: 'img/さそり座.png' },
+                        { name: 'いて座', img: 'img/いて座.png' },
+                        { name: 'やぎ座', img: 'img/やぎ座.png' },
+                        { name: 'みずがめ座', img: 'img/みずがめ座.png' },
+                        { name: 'うお座', img: 'img/うお座.png' }
+                    ];
+                    function seededRandomMini(seed) {
+                        var x = Math.sin(seed) * 10000;
+                        return x - Math.floor(x);
+                    }
+                    var todayMini = new Date();
+                    var yyyyMini = todayMini.getFullYear();
+                    var mmMini = (todayMini.getMonth() + 1).toString().padStart(2, '0');
+                    var ddMini = todayMini.getDate().toString().padStart(2, '0');
+                    var seedMini = parseInt(yyyyMini + mmMini + ddMini);
+                    var zodiacRankMini = zodiacMini.map(function (z, i) { return Object.assign({}, z, { rank: i + 1 }); });
+                    for (var i = zodiacRankMini.length - 1; i > 0; i--) {
+                        var j = Math.floor(seededRandomMini(seedMini + i) * (i + 1));
+                        var temp = zodiacRankMini[i];
+                        zodiacRankMini[i] = zodiacRankMini[j];
+                        zodiacRankMini[j] = temp;
+                    }
+                    // 上位3位と最下位のみ抽出
+                    var top3Mini = zodiacRankMini.slice(0, 3);
+                    var lastMini = zodiacRankMini[zodiacRankMini.length - 1];
+                    var htmlMini = '<div style="font-size:1.1em; font-weight:bold; margin-bottom:8px; color:#a14227;">今日の星座占いランキング</div>';
+                    htmlMini += '<table style="margin:0 auto; font-size:1em; border-collapse:collapse; width:100%;">';
+                    for (var i = 0; i < top3Mini.length; i++) {
+                        htmlMini += "<tr><td style='font-weight:bold; color:#247cffb9; width:2.5em;'>" + (i + 1) + "位</td><td><img src='" + top3Mini[i].img + "' alt='" + top3Mini[i].name + "' style='width:32px; height:32px; vertical-align:middle;'></td><td style='color:#444;'>" + top3Mini[i].name + "</td></tr>";
+                    }
+                    htmlMini += "<tr><td style='font-weight:bold; color:#e57373;'>最下位</td><td><img src='" + lastMini.img + "' alt='" + lastMini.name + "' style='width:32px; height:32px; vertical-align:middle;'></td><td style='color:#444;'>" + lastMini.name + "</td></tr>";
+                    htmlMini += '</table>';
+                    document.getElementById('zodiac-mini-ranking').innerHTML = htmlMini;
+                })();
+            </script>
+        </div>
         <div id="zodiac-modal"
             style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.25); z-index:1000; align-items:center; justify-content:center;">
             <div
