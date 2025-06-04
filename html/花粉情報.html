@@ -3,68 +3,106 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>花粉情報</title>
-    <link rel="stylesheet" href="../CSS/HOME.css">
     <style>
-        .info-table {
-            margin: 24px auto;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: #fffbe7;
-            border-radius: 18px;
-            box-shadow: 0 2px 12px #f6d36544;
-            min-width: 320px;
-            max-width: 600px;
-            font-size: 1.1em;
-            overflow: hidden;
-        }
-
-        .info-table th,
-        .info-table td {
-            padding: 14px 18px;
+        #header {
+            background-color: #f6e7a1;
+            font-size: 30px;
+            color: #a14227;
+            padding: 5px 0;
             text-align: center;
-            border-bottom: 1px solid #f6d36544;
         }
 
-        .info-table th {
-            background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
-            color: #333;
+        #header2 {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
+        body {
+            background-color: #fffbe7;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
             font-weight: bold;
+            font-size: 1.1em;
         }
 
-        .info-table tr:last-child td {
-            border-bottom: none;
+        th {
+            background: #555353;
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <div id="header">花粉情報</div>
-    <div id="contents">
-        <table class="info-table">
-            <tr>
-                <th>日付</th>
-                <th>花粉量</th>
-                <th>注意事項</th>
-            </tr>
-            <tr>
-                <td>2025/06/03</td>
-                <td>やや多い</td>
-                <td>マスク・メガネ推奨</td>
-            </tr>
-            <tr>
-                <td>2025/06/04</td>
-                <td>少ない</td>
-                <td>外出時は念のため対策を</td>
-            </tr>
-            <tr>
-                <td>2025/06/05</td>
-                <td>多い</td>
-                <td>外出を控えめに</td>
-            </tr>
-        </table>
-    </div>
+    <header>
+        <div id="header">
+            <h1>花粉情報</h1>
+            <div id="header2">
+                <p>大阪の花粉情報</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>花粉予測（1週間分）</h2>
+            <table>
+                <tr>
+                    <th>日付</th>
+                    <th>花粉量</th>
+                    <th>アドバイス</th>
+                </tr>
+                <tr>
+                    <td>2025/05/29（木）</td>
+                    <td>多い</td>
+                    <td>外出時はマスク・メガネ推奨</td>
+                </tr>
+                <tr>
+                    <td>2025/05/30（金）</td>
+                    <td>やや多い</td>
+                    <td>洗濯物は室内干し推奨</td>
+                </tr>
+                <tr>
+                    <td>2025/05/31（土）</td>
+                    <td>少ない</td>
+                    <td>外出時は念のため対策を</td>
+                </tr>
+                <tr>
+                    <td>2025/06/01（日）</td>
+                    <td>多い</td>
+                    <td>外出を控えめに</td>
+                </tr>
+                <tr>
+                    <td>2025/06/02（月）</td>
+                    <td>やや多い</td>
+                    <td>マスク・メガネ推奨</td>
+                </tr>
+                <tr>
+                    <td>2025/06/03（火）</td>
+                    <td>やや多い</td>
+                    <td>マスク・メガネ推奨</td>
+                </tr>
+                <tr>
+                    <td>2025/06/04（水）</td>
+                    <td>少ない</td>
+                    <td>外出時は念のため対策を</td>
+                </tr>
+            </table>
+        </div>
+    </header>
 </body>
 
 </html>

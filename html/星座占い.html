@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>星座占い</title>
@@ -11,29 +12,36 @@
             padding: 30px;
             text-align: center;
         }
+
         #contents {
             text-align: center;
             margin: 20px;
             font-size: 25px;
         }
+
         body {
             background-color: #fffbe7;
         }
+
         table {
             border-collapse: collapse;
             margin: 0 auto;
             text-align: center;
         }
-        th, td {
-            border: 1px solid #555353;
+
+        th,
+        td {
+            border: 2.5px solid #555353;
             padding: 6px 12px;
             font-weight: bold;
             font-size: 1.1em;
         }
+
         th {
-            background: #f6d365;
+            background: #555353;
             color: white;
         }
+
         .zodiac-img {
             width: 48px;
             height: 48px;
@@ -41,6 +49,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div id="header">
@@ -68,18 +77,18 @@
         <script>
             // 星座データ例
             const zodiacList = [
-                { name: 'おひつじ座', img: '../../img/おひつじ座.png' },
-                { name: 'おうし座', img: '../../img/おうし座.png' },
-                { name: 'ふたご座', img: '../../img/ふたご座.png' },
-                { name: 'かに座', img: '../../img/かに座.png' },
-                { name: 'しし座', img: '../../img/しし座.png' },
-                { name: 'おとめ座', img: '../../img/おとめ座.png' },
-                { name: 'てんびん座', img: '../../img/てんびん座.png' },
-                { name: 'さそり座', img: '../../img/さそり座.png' },
-                { name: 'いて座', img: '../../img/いて座.png' },
-                { name: 'やぎ座', img: '../../img/やぎ座.png' },
-                { name: 'みずがめ座', img: '../../img/みずがめ座.png' },
-                { name: 'うお座', img: '../../img/うお座.png' }
+                { name: 'おひつじ座', img: 'img/おひつじ座.png' },
+                { name: 'おうし座', img: 'img/おうし座.png' },
+                { name: 'ふたご座', img: 'img/ふたご座.png' },
+                { name: 'かに座', img: 'img/かに座.png' },
+                { name: 'しし座', img: 'img/しし座.png' },
+                { name: 'おとめ座', img: 'img/おとめ座.png' },
+                { name: 'てんびん座', img: 'img/てんびん座.png' },
+                { name: 'さそり座', img: 'img/さそり座.png' },
+                { name: 'いて座', img: 'img/いて座.png' },
+                { name: 'やぎ座', img: 'img/やぎ座.png' },
+                { name: 'みずがめ座', img: 'img/みずがめ座.png' },
+                { name: 'うお座', img: 'img/うお座.png' }
             ];
             // サンプル運勢データ
             const fortuneData = [
@@ -122,4 +131,5 @@
         </script>
     </main>
 </body>
+
 </html>

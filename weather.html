@@ -121,7 +121,7 @@
             style="display:flex; flex-wrap:wrap; justify-content:center; gap:18px; margin: 0 auto 18px auto; max-width:900px;">
             <a href="html/天気予報.html" class="info-box-link" style="text-decoration:none;">
                 <div class="info-box"
-                    style="background:#f6d365; color:#fff; border-radius:14px; box-shadow:0 2px 8px #f6d36544; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em;">
+                    style="background:#ffa641; color:#fff; border-radius:14px; box-shadow:0 2px 8px #f6d36544; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em;">
                     天気予報
                 </div>
             </a>
@@ -161,7 +161,7 @@
                     台風情報
                 </div>
             </a>
-            <a href="#" id="zodiac-link-box" class="info-box-link" style="text-decoration:none;">
+            <a href="html/占い.html" class="info-box-link" style="text-decoration:none;">
                 <div class="info-box"
                     style="background:#fff; color:#a14227; border-radius:14px; box-shadow:0 2px 8px #f6d36544; padding:18px 18px; min-width:110px; text-align:center; font-weight:bold; font-size:1.1em; border:1.5px solid #f6d365;">
                     星座占い
@@ -233,9 +233,9 @@
                     var htmlMini = '<div style="font-size:1.1em; font-weight:bold; margin-bottom:8px; color:#a14227;">今日の星座占いランキング</div>';
                     htmlMini += '<table style="margin:0 auto; font-size:1em; border-collapse:collapse; width:100%;">';
                     for (var i = 0; i < top3Mini.length; i++) {
-                        htmlMini += "<tr><td style='font-weight:bold; color:#247cffb9; width:2.5em;'>" + (i + 1) + "位</td><td><img src='" + top3Mini[i].img + "' alt='" + top3Mini[i].name + "' style='width:32px; height:32px; vertical-align:middle;'></td><td style='color:#444;'>" + top3Mini[i].name + "</td></tr>";
+                        htmlMini += "<tr><td style='font-weight:bold; color:#247cffb9; width:2.5em;'>" + (i + 1) + "位</td><td><img src='" + top3Mini[i].img + "' alt='" + top3Mini[i].name + "' style='width:56px; height:56px; vertical-align:middle;'></td><td style='color:#444; font-weight:bold; font-size:1.1em;'>" + top3Mini[i].name + "</td></tr>";
                     }
-                    htmlMini += "<tr><td style='font-weight:bold; color:#e57373;'>最下位</td><td><img src='" + lastMini.img + "' alt='" + lastMini.name + "' style='width:32px; height:32px; vertical-align:middle;'></td><td style='color:#444;'>" + lastMini.name + "</td></tr>";
+                    htmlMini += "<tr><td style='font-weight:bold; color:#e57373;'>最下位</td><td><img src='" + lastMini.img + "' alt='" + lastMini.name + "' style='width:56px; height:56px; vertical-align:middle;'></td><td style='color:#444; font-weight:bold; font-size:1.1em;'>" + lastMini.name + "</td></tr>";
                     htmlMini += '</table>';
                     document.getElementById('zodiac-mini-ranking').innerHTML = htmlMini;
                 })();
@@ -303,9 +303,9 @@
                     var htmlMini = '<div style="font-size:1.1em; font-weight:bold; margin-bottom:8px; color:#a14227;">今日の星座占いランキング</div>';
                     htmlMini += '<table style="margin:0 auto; font-size:1em; border-collapse:collapse; width:100%;">';
                     for (var i = 0; i < top3Mini.length; i++) {
-                        htmlMini += "<tr><td style='font-weight:bold; color:#247cffb9; width:2.5em;'>" + (i + 1) + "位</td><td><img src='" + top3Mini[i].img + "' alt='" + top3Mini[i].name + "' style='width:32px; height:32px; vertical-align:middle;'></td><td style='color:#444;'>" + top3Mini[i].name + "</td></tr>";
+                        htmlMini += "<tr><td style='font-weight:bold; color:#247cffb9; width:2.5em;'>" + (i + 1) + "位</td><td><img src='" + top3Mini[i].img + "' alt='" + top3Mini[i].name + "' style='width:56px; height:56px; vertical-align:middle;'></td><td style='color:#444; font-weight:bold; font-size:1.1em;'>" + top3Mini[i].name + "</td></tr>";
                     }
-                    htmlMini += "<tr><td style='font-weight:bold; color:#e57373;'>最下位</td><td><img src='" + lastMini.img + "' alt='" + lastMini.name + "' style='width:32px; height:32px; vertical-align:middle;'></td><td style='color:#444;'>" + lastMini.name + "</td></tr>";
+                    htmlMini += "<tr><td style='font-weight:bold; color:#e57373;'>最下位</td><td><img src='" + lastMini.img + "' alt='" + lastMini.name + "' style='width:56px; height:56px; vertical-align:middle;'></td><td style='color:#444; font-weight:bold; font-size:1.1em;'>" + lastMini.name + "</td></tr>";
                     htmlMini += '</table>';
                     document.getElementById('zodiac-mini-ranking').innerHTML = htmlMini;
                 })();
@@ -356,6 +356,12 @@
                     document.getElementById('zodiac-iframe').focus();
                 };
             });
+            document.getElementById('zodiac-link-box').onclick = function (e) {
+                e.preventDefault();
+                document.getElementById('zodiac-iframe-area').style.display = 'block';
+                document.getElementById('zodiac-iframe').src = 'html/星座占い.html';
+                document.getElementById('zodiac-iframe').focus();
+            };
         </script>
     </header>
 </body>
