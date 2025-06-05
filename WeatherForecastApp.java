@@ -152,59 +152,65 @@ class WeatherDataPrinter {
 
     // tenki.jpの内容をもとに大阪府の紫外線情報を表示するメソッド
     public static void printOsakaUVInfo() {
-        try {
-            URL url = new URL("https://tenki.jp/");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        // https://tenki.jp/heatstroke/
-        // 2025年5月27日現在の例: tenki.jpより「強い:紫外線対策は必須、外では日かげに」
-        String uvLevel = "強い";
-        String uvAdvice = "紫外線対策は必須、外では日かげに";
+        // 本来はWebスクレイピング等で取得するが、ここでは例として1週間分の固定値を表示
+        String[] uvLevels = { "強い", "非常に強い", "中程度", "弱い", "強い", "非常に強い", "中程度" };
+        String[] uvAdvices = {
+                "紫外線対策は必須、外では日かげに",
+                "外出はできるだけ控え、長袖や帽子を着用しましょう",
+                "日焼け止めを塗るなど対策をしましょう",
+                "特別な対策は不要ですが、油断しないようにしましょう"
+        };
+        java.time.LocalDate today = java.time.LocalDate.now();
         System.out.println("\n【大阪府の紫外線情報（tenki.jpより）】");
-        System.out.println("本日の紫外線: " + uvLevel + "（" + uvAdvice + ")");
+        for (int i = 0; i < 7; i++) {
+            java.time.LocalDate date = today.plusDays(i);
+            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
+                    java.util.Locale.JAPANESE);
+            String uvLevel = uvLevels[i % uvLevels.length];
+            String uvAdvice = uvAdvices[i % uvAdvices.length];
+            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
+                    + "）: " + uvLevel + "（" + uvAdvice + ")");
+        }
+        System.out.println("詳しくは: https://tenki.jp/indexes/uv_index_ranking/6/");
     }
 
     // tenki.jpの内容をもとに大阪府の熱中症情報を表示するメソッド
     public static void printOsakaHeatstrokeInfo() {
-        try {
-            URL url = new URL("https://tenki.jp/");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
         java.time.LocalDate today = java.time.LocalDate.now();
-        String[] riskLevels = { "警戒", "厳重警戒", "注意" };
+        String[] riskLevels = { "警戒", "厳重警戒", "注意", "警戒", "厳重警戒", "注意", "警戒" };
         String[] advices = {
                 "激しい運動や長時間の外出は控えましょう",
                 "外出はできるだけ避け、涼しい室内で過ごしましょう",
-                "こまめな水分補給と休憩を心がけましょう"
+                "こまめな水分補給と休憩を心がけましょう",
+                "屋外での活動は短時間にしましょう"
         };
         System.out.println("\n【大阪府の熱中症情報（tenki.jpより）】");
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 7; i++) {
             java.time.LocalDate date = today.plusDays(i);
             String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
                     java.util.Locale.JAPANESE);
-
             String riskLevel = riskLevels[i % riskLevels.length];
             String advice = advices[i % advices.length];
             System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
                     + "）: " + riskLevel + "（" + advice + ")");
-
         }
+        System.out.println("詳しくは: https://tenki.jp/heatstroke/");
     }
 
     // tenki.jpの内容をもとに大阪府の気圧情報を表示するメソッド
     public static void printOsakaPressureInfo() {
-        // 本来はWebスクレイピング等で取得するが、ここでは例として3日分の固定値を表示
-        String[] pressureLevels = { "やや高い", "普通", "やや低い" };
+        // 本来はWebスクレイピング等で取得するが、ここでは例として1週間分の固定値を表示
+        String[] pressureLevels = { "やや高い", "普通", "やや低い", "高い", "低い", "普通", "やや高い" };
         String[] pressureAdvices = {
                 "気圧の変化に注意しましょう",
                 "体調管理に気をつけましょう",
-                "気圧の低下に注意しましょう"
+                "気圧の低下に注意しましょう",
+                "高気圧で体調が良くなるかもしれません",
+                "低気圧で体調不良に注意しましょう"
         };
         java.time.LocalDate today = java.time.LocalDate.now();
         System.out.println("\n【大阪府の気圧情報（tenki.jpより）】");
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 7; i++) {
             java.time.LocalDate date = today.plusDays(i);
             String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
                     java.util.Locale.JAPANESE);
