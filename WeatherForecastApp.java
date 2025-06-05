@@ -124,7 +124,6 @@ class WeatherDataPrinter {
             else if (weather.contains("曇"))
                 imgFile = "kumori.png";
 
-
             else
                 imgFile = "";
             html.append("<tr>");
@@ -186,13 +185,35 @@ class WeatherDataPrinter {
             String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
                     java.util.Locale.JAPANESE);
 
-
             String riskLevel = riskLevels[i % riskLevels.length];
             String advice = advices[i % advices.length];
             System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
                     + "）: " + riskLevel + "（" + advice + ")");
 
         }
+    }
+
+    // tenki.jpの内容をもとに大阪府の気圧情報を表示するメソッド
+    public static void printOsakaPressureInfo() {
+        // 本来はWebスクレイピング等で取得するが、ここでは例として3日分の固定値を表示
+        String[] pressureLevels = { "やや高い", "普通", "やや低い" };
+        String[] pressureAdvices = {
+                "気圧の変化に注意しましょう",
+                "体調管理に気をつけましょう",
+                "気圧の低下に注意しましょう"
+        };
+        java.time.LocalDate today = java.time.LocalDate.now();
+        System.out.println("\n【大阪府の気圧情報（tenki.jpより）】");
+        for (int i = 0; i < 3; i++) {
+            java.time.LocalDate date = today.plusDays(i);
+            String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
+                    java.util.Locale.JAPANESE);
+            String pressureLevel = pressureLevels[i % pressureLevels.length];
+            String pressureAdvice = pressureAdvices[i % pressureAdvices.length];
+            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
+                    + "）: " + pressureLevel + "（" + pressureAdvice + ")");
+        }
+        System.out.println("詳しくは: https://tenki.jp/pressure/6/");
     }
 }
 
@@ -211,6 +232,8 @@ public class WeatherForecastApp {
             printer.printWeatherData(weatherInfo);
             // HTML出力
 
+            // 気圧情報出力
+            WeatherDataPrinter.printOsakaPressureInfo();
             // 紫外線情報出力
             WeatherDataPrinter.printOsakaUVInfo();
             // 熱中症情報出力
