@@ -193,27 +193,27 @@ class WeatherDataPrinter {
         }
     }
 
-    // tenki.jpの内容をもとに大阪府の3日間気圧情報を表示するメソッド
-    public static void printOsakaPressureInfo3Days() {
-        java.time.LocalDate today = java.time.LocalDate.now();
-        // サンプルデータ（実際はWebスクレイピング等で取得）
-        String[] pressureLevels = { "1012 hPa", "1008 hPa", "1005 hPa" };
-        String[] trends = { "やや高め", "やや低め", "低め" };
-        String[] advices = {
-                "気圧の変化による体調変化に注意しましょう",
-                "頭痛やだるさを感じたら無理せず休みましょう",
-                "体調管理に気をつけてお過ごしください"
+    // tenki.jpの内容をもとに大阪府の気圧情報を表示するメソッド
+    public static void printOsakaPressureInfo() {
+        // 本来はWebスクレイピング等で取得するが、ここでは例として3日分の固定値を表示
+        String[] pressureLevels = { "やや高い", "普通", "やや低い" };
+        String[] pressureAdvices = {
+                "気圧の変化に注意しましょう",
+                "体調管理に気をつけましょう",
+                "気圧の低下に注意しましょう"
         };
-        System.out.println("\n【大阪府の気圧情報（tenki.jpより・3日分）】");
+        java.time.LocalDate today = java.time.LocalDate.now();
+        System.out.println("\n【大阪府の気圧情報（tenki.jpより）】");
         for (int i = 0; i < 3; i++) {
             java.time.LocalDate date = today.plusDays(i);
             String youbi = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.SHORT,
                     java.util.Locale.JAPANESE);
-            System.out.println(
-                    date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi + "）: "
-                            + pressureLevels[i % pressureLevels.length] + "（" + trends[i % trends.length] + "、"
-                            + advices[i % advices.length] + ")");
+            String pressureLevel = pressureLevels[i % pressureLevels.length];
+            String pressureAdvice = pressureAdvices[i % pressureAdvices.length];
+            System.out.println(date.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "（" + youbi
+                    + "）: " + pressureLevel + "（" + pressureAdvice + ")");
         }
+        System.out.println("詳しくは: https://tenki.jp/pressure/6/");
     }
 }
 
@@ -232,12 +232,12 @@ public class WeatherForecastApp {
             printer.printWeatherData(weatherInfo);
             // HTML出力
 
+            // 気圧情報出力
+            WeatherDataPrinter.printOsakaPressureInfo();
             // 紫外線情報出力
             WeatherDataPrinter.printOsakaUVInfo();
             // 熱中症情報出力
             WeatherDataPrinter.printOsakaHeatstrokeInfo();
-            // 3日分の気圧情報出力
-            WeatherDataPrinter.printOsakaPressureInfo3Days();
 
         } catch (IOException | URISyntaxException e) {
             System.out.println("エラーが発生しました: " + e.getMessage()); // エラー発生時のメッセージを表示
