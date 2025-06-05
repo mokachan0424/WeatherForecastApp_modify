@@ -223,20 +223,77 @@ class WeatherDataPrinter {
     }
 }
 
+// 地震情報取得用クラス
+class QuakeDataFetcher {
+    private static final String QUAKE_URL = "https://www.jma.go.jp/bosai/quake/data/list.json";
+    public String fetchQuakeData() throws IOException, URISyntaxException {
+        URI uri = new URI(QUAKE_URL);
+        URL url = uri.toURL();
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            StringBuilder responseBody = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream(), "UTF-8"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseBody.append(line);
+                }
+            }
+            return responseBody.toString();
+        } else {
+            throw new IOException("地震データ取得に失敗しました。レスポンスコード: " + responseCode);
+        }
+    }
+}
+
+// 地震情報解析用クラス
+class QuakeDataParser {
+    // 近畿地方の地震のみ表示し、なければ「情報はありません」と返す
+    public String parseLatestQuake(String jsonData) {
+        JSONArray quakeArray = new JSONArray(jsonData);
+        for (int i = 0; i < quakeArray.length(); i++) {
+            JSONObject quake = quakeArray.getJSONObject(i);
+            String hypocenter = quake.optString("hypocenter", "");
+            if (hypocenter.contains("近畿")) {
+                String time = quake.optString("time", "不明");
+                String maxScale = quake.optString("maxScale", "不明");
+                String mag = quake.optString("mag", "不明");
+                return String.format("発生時刻: %s / 震源地: %s / 最大震度: %s / マグニチュード: %s",
+                        time, hypocenter, maxScale, mag);
+            }
+        }
+        return "現在、発表されている地震情報はありません。";
+    }
+}
+
 // メイン処理クラス
 public class WeatherForecastApp {
     private static final String TARGET_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json"; // 気象庁の天気予報APIのURL
 
     public static void main(String[] args) {
-        WeatherDataFetcher fetcher = new WeatherDataFetcher(); // 天気データ取得用クラスのインスタンスを作成
-        WeatherDataParser parser = new WeatherDataParser(); // JSONデータ解析用クラスのインスタンスを作成
-        WeatherDataPrinter printer = new WeatherDataPrinter(); // 天気データ表示用クラスのインスタンスを作成
+        WeatherDataFetcher fetcher = new WeatherDataFetcher();
+        WeatherDataParser parser = new WeatherDataParser();
+        WeatherDataPrinter printer = new WeatherDataPrinter();
 
         try {
             String jsonData = fetcher.fetchWeatherData(TARGET_URL);
             List<String[]> weatherInfo = parser.parseWeatherData(jsonData);
             printer.printWeatherData(weatherInfo);
             // HTML出力
+
+            // 地震情報の取得と表示
+            System.out.println("\n【地震情報】");
+            try {
+                QuakeDataFetcher quakeFetcher = new QuakeDataFetcher();
+                QuakeDataParser quakeParser = new QuakeDataParser();
+                String quakeJson = quakeFetcher.fetchQuakeData();
+                String latestQuake = quakeParser.parseLatestQuake(quakeJson);
+                System.out.println(latestQuake);
+            } catch (Exception e) {
+                System.out.println("地震情報の取得に失敗しました。");
+            }
 
             // 気圧情報出力
             WeatherDataPrinter.printOsakaPressureInfo();
@@ -246,7 +303,7 @@ public class WeatherForecastApp {
             WeatherDataPrinter.printOsakaHeatstrokeInfo();
 
         } catch (IOException | URISyntaxException e) {
-            System.out.println("エラーが発生しました: " + e.getMessage()); // エラー発生時のメッセージを表示
+            System.out.println("エラーが発生しました: " + e.getMessage());
         }
     }
 }
