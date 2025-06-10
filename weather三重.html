@@ -146,6 +146,7 @@
 <link rel="stylesheet" :url="text/css" href="CSS/HOME.css">
 
 <body>
+
     <header>
         <div id="header">
             <h1>天気予報</h1>
@@ -155,15 +156,15 @@
         </div>
         <!-- ナビゲーションボタン部分 -->
         <div class="nav-boxes">
-            <button onclick="location.href='html/大阪/天気予報.html'">天気予報</button>
-            <button onclick="location.href='html/大阪/花粉情報.html'">花粉情報</button>
-            <button onclick="location.href='html/大阪/紫外線情報.html'">紫外線情報</button>
-            <button onclick="location.href='html/大阪/熱中症情報.html'">熱中症情報</button>
-            <button onclick="location.href='html/大阪/気圧情報.html'">気圧情報</button>
-            <button onclick="location.href='html/大阪/台風.html'">台風情報</button>
-            <button onclick="location.href='html/大阪/地震情報.html'">地震情報</button>
-            <button onclick="location.href='html/大阪/電車.html'">電車遅延</button>
-            <button onclick="location.href='html/大阪/星座占い.html'">星座占い</button>
+            <button onclick="location.href='html/三重/天気予報.html'">天気予報</button>
+            <button onclick="location.href='html/三重/花粉情報.html'">花粉情報</button>
+            <button onclick="location.href='html/三重/紫外線情報.html'">紫外線情報</button>
+            <button onclick="location.href='html/三重/熱中症情報.html'">熱中症情報</button>
+            <button onclick="location.href='html/三重/気圧情報.html'">気圧情報</button>
+            <button onclick="location.href='html/三重/台風.html'">台風情報</button>
+            <button onclick="location.href='html/三重/地震情報.html'">地震情報</button>
+            <button onclick="location.href='html/三重/電車.html'">電車遅延</button>
+            <button onclick="location.href='html/三重/星座占い.html'">星座占い</button>
         </div>
         <div id="contents">
             <h2>↓トピックス情報↓</h2>
@@ -308,59 +309,8 @@
                 })();
             </script>
         </div>
-        <div id="zodiac-modal"
-            style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.25); z-index:1000; align-items:center; justify-content:center;">
-            <div
-                style="background:#fff; border-radius:18px; box-shadow:0 2px 16px #8884; padding:32px 24px; min-width:260px; max-width:90vw; margin:auto; text-align:center;">
-                <h2 style="margin-bottom:18px;">星座を選択してください</h2>
-                <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
-                    <button class="zodiac-btn" data-zodiac="おひつじ座">おひつじ座</button>
-                    <button class="zodiac-btn" data-zodiac="おうし座">おうし座</button>
-                    <button class="zodiac-btn" data-zodiac="ふたご座">ふたご座</button>
-                    <button class="zodiac-btn" data-zodiac="かに座">かに座</button>
-                    <button class="zodiac-btn" data-zodiac="しし座">しし座</button>
-                    <button class="zodiac-btn" data-zodiac="おとめ座">おとめ座</button>
-                    <button class="zodiac-btn" data-zodiac="てんびん座">てんびん座</button>
-                    <button class="zodiac-btn" data-zodiac="さそり座">さそり座</button>
-                    <button class="zodiac-btn" data-zodiac="いて座">いて座</button>
-                    <button class="zodiac-btn" data-zodiac="やぎ座">やぎ座</button>
-                    <button class="zodiac-btn" data-zodiac="みずがめ座">みずがめ座</button>
-                    <button class="zodiac-btn" data-zodiac="うお座">うお座</button>
-                </div>
-                <div style="margin-top:18px;">
-                    <button id="zodiac-close" style="padding:6px 18px; border-radius:8px; background:#eee;">閉じる</button>
-                </div>
-            </div>
-        </div>
-        <div id="zodiac-iframe-area" style="display:none; text-align:center; margin:32px auto 0 auto; max-width:700px;">
-            <iframe id="zodiac-iframe" src=""
-                style="width:100%; min-height:420px; border-radius:18px; border:1px solid #eee; box-shadow:0 2px 12px #8882;"></iframe>
-        </div>
-        <script>
-            document.getElementById('zodiac-link').onclick = function (e) {
-                e.preventDefault();
-                document.getElementById('zodiac-modal').style.display = 'flex';
-            };
-            document.getElementById('zodiac-close').onclick = function () {
-                document.getElementById('zodiac-modal').style.display = 'none';
-            };
-            Array.from(document.getElementsByClassName('zodiac-btn')).forEach(btn => {
-                btn.onclick = function () {
-                    const zodiac = btn.getAttribute('data-zodiac');
-                    document.getElementById('zodiac-modal').style.display = 'none';
-                    document.getElementById('zodiac-iframe-area').style.display = 'block';
-                    document.getElementById('zodiac-iframe').src = `html/星座/${zodiac}.html`;
-                    document.getElementById('zodiac-iframe').focus();
-                };
-            });
-            document.getElementById('zodiac-link-box').onclick = function (e) {
-                e.preventDefault();
-                document.getElementById('zodiac-iframe-area').style.display = 'block';
-                document.getElementById('zodiac-iframe').src = 'html/星座占い.html';
-                document.getElementById('zodiac-iframe').focus();
-            };
-        </script>
     </header>
+
 </body>
 
 </html>

@@ -9,6 +9,23 @@
         body {
             background: #ffeece;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 
@@ -19,7 +36,37 @@
     </div>
     <div id="contents"
         style="text-align:center; margin:0 auto; max-width:600px; background:#fff; border-radius:18px; box-shadow:0 2px 8px #7ec6e644; padding:24px 0;">
-        <p>奈良県の天気予報ページは今後実装予定です。</p>
+        <h2>天気予報（1週間分）</h2>
+        <table>
+            <tr>
+                <th>日付</th>
+                <th>天気</th>
+                <th>風速</th>
+                <th>降水確率</th>
+                <th>信頼度</th>
+            </tr>
+            <tr>
+                <td>2025/06/10（火）</td>
+                <td><img src="../../img/hare.png" alt="晴れ" width="64" height="64"><br>晴れ</td>
+                <td>南の風</td>
+                <td>12%</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <td>2025/06/11（水）</td>
+                <td><img src="../../img/kumori.png" alt="くもり" width="64" height="64"><br>くもり</td>
+                <td>北東の風</td>
+                <td>28%</td>
+                <td>B</td>
+            </tr>
+            <tr>
+                <td>2025/06/12（木）</td>
+                <td><img src="../../img/ame.png" alt="雨" width="64" height="64"><br>雨</td>
+                <td>西の風</td>
+                <td>55%</td>
+                <td>B</td>
+            </tr>
+        </table>
     </div>
 </body>
 
