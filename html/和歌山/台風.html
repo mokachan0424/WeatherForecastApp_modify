@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>台風情報</title>
+    <style>
+        #header {
+            background-color: hsl(224, 49%, 52%);
+            font-size: 30px;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
+        body {
+            background-color: #cee5ff;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        th {
+            background: #555353;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="header">
+            <h1>台風情報</h1>
+            <div id="header2">
+                <p>最新の台風情報</p>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="contents">
+            <h2>台風接近・発生情報（例）</h2>
+            <table border="1">
+                <tr>
+                    <th>発生日時</th>
+                    <th>台風番号</th>
+                    <th>中心気圧（hPa）</th>
+                    <th>最大風速（m/s）</th>
+                    <th>進路</th>
+                </tr>
+                <tr>
+                    <td>2025/06/01 09:00</td>
+                    <td>第3号</td>
+                    <td>970</td>
+                    <td>40</td>
+                    <td>北西</td>
+                </tr>
+                <tr>
+                    <td>2025/05/28 15:00</td>
+                    <td>第2号</td>
+                    <td>985</td>
+                    <td>35</td>
+                    <td>北</td>
+                </tr>
+                <tr>
+                    <td>2025/05/25 12:00</td>
+                    <td>第1号</td>
+                    <td>990</td>
+                    <td>30</td>
+                    <td>北東</td>
+                </tr>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>
