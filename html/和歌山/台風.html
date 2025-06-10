@@ -6,11 +6,16 @@
     <title>台風情報</title>
     <style>
         #header {
-            background-color: hsl(224, 49%, 52%);
+            background-color: #ffa641;
             font-size: 30px;
             color: white;
-            padding: 30px;
+            padding: 5px 0;
             text-align: center;
+        }
+
+        #header2 {
+            font-size: 1.2em;
+            margin-top: 5px;
         }
 
         #contents {
@@ -20,7 +25,7 @@
         }
 
         body {
-            background-color: #cee5ff;
+            background-color: #f0efd1;
         }
 
         table {
@@ -41,75 +46,45 @@
             background: #555353;
             color: white;
         }
-
-        #header2 {
-            margin-top: 10px;
-            font-size: 0.8em;
-        }
-
-        /* 和歌山県スタイル */
-        .wakayama #header {
-            text-align: center;
-            margin: 32px auto 24px auto;
-        }
-
-        .wakayama #contents {
-            text-align: center;
-            margin: 0 auto;
-            max-width: 600px;
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 2px 8px #7ec6e644;
-            padding: 24px 0;
-        }
-
-        .wakayama table {
-            margin: 0 auto;
-        }
     </style>
 </head>
 
-<body class="wakayama">
+<body>
     <header>
         <div id="header">
-            <h1>和歌山県 台風情報</h1>
+            <h1>台風情報</h1>
+            <div id="header2">
+                <p>和歌山の台風情報</p>
+            </div>
         </div>
-    </header>
-    <main>
         <div id="contents">
-            <h2>台風接近・発生情報（例）</h2>
-            <table border="1">
+            <h2>台風情報（サンプル）</h2>
+            <table>
                 <tr>
-                    <th>発生日時</th>
+                    <th>日付</th>
                     <th>台風番号</th>
-                    <th>中心気圧（hPa）</th>
-                    <th>最大風速（m/s）</th>
-                    <th>進路</th>
+                    <th>接近予想</th>
+                    <th>影響度</th>
+                    <th>備考</th>
                 </tr>
                 <tr>
-                    <td>2025/06/10 09:00</td>
-                    <td>第4号</td>
-                    <td>965</td>
-                    <td>42</td>
-                    <td>北西</td>
+                    <td>2025/06/10</td>
+                    <td>台風3号</td>
+                    <td>6月12日 午後</td>
+                    <td>中（強風・大雨の恐れ）</td>
+                    <td>最新情報に注意</td>
                 </tr>
                 <tr>
-                    <td>2025/06/05 15:00</td>
-                    <td>第3号</td>
-                    <td>980</td>
-                    <td>38</td>
-                    <td>北</td>
-                </tr>
-                <tr>
-                    <td>2025/05/30 12:00</td>
-                    <td>第2号</td>
-                    <td>990</td>
-                    <td>32</td>
-                    <td>北東</td>
+                    <td>2025/06/05</td>
+                    <td>台風2号</td>
+                    <td>通過済み</td>
+                    <td>小（影響少）</td>
+                    <td>特記事項なし</td>
                 </tr>
             </table>
+            <p style="margin-top:16px; color:#888; font-size:0.8em;">※上記はサンプルデータです。実際の台風情報は気象庁等の公式発表をご確認ください。</p>
         </div>
-    </main>
+    </header>
 </body>
 
 </html>
