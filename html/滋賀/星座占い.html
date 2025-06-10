@@ -3,26 +3,68 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>滋賀県 星座占い</title>
-    <link rel="stylesheet" href="../CSS/HOME.css">
+    <title>星座占い</title>
+    <style>
+        #header {
+            background-color: #ffa641;
+            font-size: 30px;
+            color: white;
+            padding: 5px 0;
+            text-align: center;
+        }
+
+        #header2 {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
+        body {
+            background-color: #f0efd1;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        th {
+            background: #555353;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="header" style="text-align:center; margin:32px auto 24px auto;">
-        <h1>滋賀県 星座占い</h1>
-    </div>
-    <div id="contents"
-        style="text-align:center; margin:0 auto; max-width:600px; background:#fff; border-radius:18px; box-shadow:0 2px 8px #7ec6e644; padding:24px 0;">
-        <h2>今日の星座占いランキング（サンプル）</h2>
-        <table class="info-table" style="margin: 0 auto; width:90%; border-collapse:collapse;">
-            <thead style="background:linear-gradient(90deg,#f7e0f7,#e0f7fa);">
+    <header>
+        <div id="header">
+            <h1>星座占い</h1>
+            <div id="header2">
+                <p>滋賀の星座占い</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>今日の星座占いランキング（サンプル）</h2>
+            <table>
                 <tr>
                     <th>順位</th>
                     <th>星座</th>
                     <th>運勢</th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
                     <td>1位</td>
                     <td>おひつじ座</td>
@@ -38,10 +80,10 @@
                     <td>ふたご座</td>
                     <td>金運アップのチャンス</td>
                 </tr>
-            </tbody>
-        </table>
-        <p style="margin-top:16px; color:#888;">※上記はサンプルデータです。実際の占い結果は日替わりで更新されます。</p>
-    </div>
+            </table>
+            <p style="margin-top:16px; color:#888; font-size:0.8em;">※上記はサンプルデータです。実際の占い結果は日替わりで更新されます。</p>
+        </div>
+    </header>
 </body>
 
 </html>

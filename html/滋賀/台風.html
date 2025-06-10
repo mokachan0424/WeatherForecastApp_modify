@@ -3,20 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>滋賀県 台風情報</title>
-    <link rel="stylesheet" href="../CSS/HOME.css">
+    <title>台風情報</title>
+    <style>
+        #header {
+            background-color: #ffa641;
+            font-size: 30px;
+            color: white;
+            padding: 5px 0;
+            text-align: center;
+        }
+
+        #header2 {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
+        body {
+            background-color: #f0efd1;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        th {
+            background: #555353;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="header" style="text-align:center; margin:32px auto 24px auto;">
-        <h1>滋賀県 台風情報</h1>
-    </div>
-    <div id="contents"
-        style="text-align:center; margin:0 auto; max-width:600px; background:#fff; border-radius:18px; box-shadow:0 2px 8px #7ec6e644; padding:24px 0;">
-        <h2>滋賀県 台風情報（サンプル）</h2>
-        <p>滋賀県に影響を及ぼす台風の最新情報をお知らせします。</p>
-        <table class="info-table" style="margin: 0 auto; width:90%; border-collapse:collapse;">
-            <thead style="background:linear-gradient(90deg,#b2d8f7,#e0f7fa);">
+    <header>
+        <div id="header">
+            <h1>台風情報</h1>
+            <div id="header2">
+                <p>滋賀の台風情報</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>台風情報（サンプル）</h2>
+            <table>
                 <tr>
                     <th>日付</th>
                     <th>台風番号</th>
@@ -24,8 +67,6 @@
                     <th>影響度</th>
                     <th>備考</th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
                     <td>2025/06/10</td>
                     <td>台風3号</td>
@@ -40,10 +81,10 @@
                     <td>小（影響少）</td>
                     <td>特記事項なし</td>
                 </tr>
-            </tbody>
-        </table>
-        <p style="margin-top:16px; color:#888;">※上記はサンプルデータです。実際の台風情報は気象庁等の公式発表をご確認ください。</p>
-    </div>
+            </table>
+            <p style="margin-top:16px; color:#888; font-size:0.8em;">※上記はサンプルデータです。実際の台風情報は気象庁等の公式発表をご確認ください。</p>
+        </div>
+    </header>
 </body>
 
 </html>

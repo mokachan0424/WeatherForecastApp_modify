@@ -3,40 +3,85 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>奈良県 熱中症情報</title>
-    <link rel="stylesheet" href="../CSS/HOME.css">
+    <title>熱中症情報</title>
+    <style>
+        #header {
+            background-color: #ffa641;
+            font-size: 30px;
+            color: white;
+            padding: 5px 0;
+            text-align: center;
+        }
+
+        #header2 {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
+        body {
+            background-color: #f0efd1;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        th {
+            background: #555353;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="header">
-        <h1>奈良県 熱中症情報</h1>
-        <div class="header2">最新の熱中症情報</div>
-    </div>
-    <div id="contents">
-        <h2>熱中症警戒情報（例）</h2>
-        <table border="1">
-            <tr>
-                <th>日付</th>
-                <th>警戒レベル</th>
-                <th>アドバイス</th>
-            </tr>
-            <tr>
-                <td>2025/06/10</td>
-                <td>厳重警戒</td>
-                <td>外出は控えめに・水分補給を</td>
-            </tr>
-            <tr>
-                <td>2025/06/11</td>
-                <td>警戒</td>
-                <td>こまめな水分補給・休憩を</td>
-            </tr>
-            <tr>
-                <td>2025/06/12</td>
-                <td>注意</td>
-                <td>屋外活動は短時間で</td>
-            </tr>
-        </table>
-    </div>
+    <header>
+        <div id="header">
+            <h1>熱中症情報</h1>
+            <div id="header2">
+                <p>奈良の熱中症情報</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>熱中症情報（サンプル）</h2>
+            <table>
+                <tr>
+                    <th>日時</th>
+                    <th>気温(℃)</th>
+                    <th>湿度(%)</th>
+                    <th>警戒レベル</th>
+                </tr>
+                <tr>
+                    <td>2025/06/10 12:00</td>
+                    <td>31.2</td>
+                    <td>68</td>
+                    <td>警戒</td>
+                </tr>
+                <tr>
+                    <td>2025/06/09 12:00</td>
+                    <td>28.5</td>
+                    <td>60</td>
+                    <td>注意</td>
+                </tr>
+            </table>
+            <p style="margin-top:16px; color:#888; font-size:0.8em;">※上記はサンプルデータです。実際の熱中症情報は環境省等の公式発表をご確認ください。</p>
+        </div>
+    </header>
 </body>
 
 </html>

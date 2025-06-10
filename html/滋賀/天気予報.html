@@ -3,54 +3,94 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>滋賀県 天気予報</title>
-    <link rel="stylesheet" href="../CSS/HOME.css">
+    <title>天気予報</title>
     <style>
+        #header {
+            background-color: #ffa641;
+            font-size: 30px;
+            color: white;
+            padding: 5px 0;
+            text-align: center;
+        }
+
+        #header2 {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
         body {
-            background: #ffeece;
+            background-color: #f0efd1;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        th {
+            background: #555353;
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <div id="header" style="text-align:center; margin:32px auto 24px auto;">
-        <h1>滋賀県 天気予報</h1>
-        <div style="font-size:1.1em; color:#333; margin-top:8px;">（サンプルページです）</div>
-    </div>
-    <div id="contents"
-        style="text-align:center; margin:0 auto; max-width:600px; background:#fff; border-radius:18px; box-shadow:0 2px 8px #7ec6e644; padding:24px 0;">
-        <h2>天気予報（1週間分）</h2>
-        <table>
-            <tr>
-                <th>日付</th>
-                <th>天気</th>
-                <th>風速</th>
-                <th>降水確率</th>
-                <th>信頼度</th>
-            </tr>
-            <tr>
-                <td>2025/06/10（火）</td>
-                <td><img src="../../img/hare.png" alt="晴れ" width="64" height="64"><br>晴れ</td>
-                <td>北の風</td>
-                <td>10%</td>
-                <td>A</td>
-            </tr>
-            <tr>
-                <td>2025/06/11（水）</td>
-                <td><img src="../../img/kumori.png" alt="くもり" width="64" height="64"><br>くもり</td>
-                <td>北西の風</td>
-                <td>25%</td>
-                <td>B</td>
-            </tr>
-            <tr>
-                <td>2025/06/12（木）</td>
-                <td><img src="../../img/ame.png" alt="雨" width="64" height="64"><br>雨</td>
-                <td>西の風</td>
-                <td>60%</td>
-                <td>B</td>
-            </tr>
-        </table>
-    </div>
+    <header>
+        <div id="header">
+            <h1>天気予報</h1>
+            <div id="header2">
+                <p>滋賀の天気予報情報</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>天気予報（1週間分）</h2>
+            <table>
+                <tr>
+                    <th>日付</th>
+                    <th>天気</th>
+                    <th>風速</th>
+                    <th>降水確率</th>
+                    <th>信頼度</th>
+                </tr>
+                <tr>
+                    <td>2025/06/10（火）</td>
+                    <td><img src="../../img/hare.png" alt="晴れ" width="64" height="64"><br>晴れ</td>
+                    <td>北の風</td>
+                    <td>10%</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>2025/06/11（水）</td>
+                    <td><img src="../../img/kumori.png" alt="くもり" width="64" height="64"><br>くもり</td>
+                    <td>北西の風</td>
+                    <td>25%</td>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <td>2025/06/12（木）</td>
+                    <td><img src="../../img/ame.png" alt="雨" width="64" height="64"><br>雨</td>
+                    <td>西の風</td>
+                    <td>60%</td>
+                    <td>B</td>
+                </tr>
+            </table>
+        </div>
+    </header>
 </body>
 
 </html>

@@ -1,29 +1,87 @@
-<div id="header">
-    <h1>和歌山県 花粉情報</h1>
-    <div class="header2">最新の花粉情報</div>
-</div>
-<div id="contents">
-    <h2>花粉予測（1週間分・例）</h2>
-    <table>
-        <tr>
-            <th>日付</th>
-            <th>花粉量</th>
-            <th>アドバイス</th>
-        </tr>
-        <tr>
-            <td>2025/06/10（火）</td>
-            <td>多い</td>
-            <td>外出時はマスク・メガネ推奨</td>
-        </tr>
-        <tr>
-            <td>2025/06/11（水）</td>
-            <td>やや多い</td>
-            <td>洗濯物は室内干し推奨</td>
-        </tr>
-        <tr>
-            <td>2025/06/12（木）</td>
-            <td>少ない</td>
-            <td>外出時は念のため対策を</td>
-        </tr>
-    </table>
-</div>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>花粉情報</title>
+    <style>
+        #header {
+            background-color: #ffa641;
+            font-size: 30px;
+            color: white;
+            padding: 5px 0;
+            text-align: center;
+        }
+
+        #header2 {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
+        body {
+            background-color: #f0efd1;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        th {
+            background: #555353;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="header">
+            <h1>花粉情報</h1>
+            <div id="header2">
+                <p>和歌山の花粉情報</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>花粉情報（サンプル）</h2>
+            <table>
+                <tr>
+                    <th>日時</th>
+                    <th>花粉量</th>
+                    <th>主な種類</th>
+                    <th>注意レベル</th>
+                </tr>
+                <tr>
+                    <td>2025/06/10 09:00</td>
+                    <td>多い</td>
+                    <td>スギ</td>
+                    <td>注意</td>
+                </tr>
+                <tr>
+                    <td>2025/06/09 09:00</td>
+                    <td>やや多い</td>
+                    <td>ヒノキ</td>
+                    <td>やや注意</td>
+                </tr>
+            </table>
+            <p style="margin-top:16px; color:#888; font-size:0.8em;">※上記はサンプルデータです。実際の花粉情報は環境省等の公式発表をご確認ください。</p>
+        </div>
+    </header>
+</body>
+
+</html>
