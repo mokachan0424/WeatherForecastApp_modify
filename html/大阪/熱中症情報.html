@@ -46,6 +46,12 @@
             background: #555353;
             color: white;
         }
+
+        .comment {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #333;
+        }
     </style>
 </head>
 
@@ -53,54 +59,32 @@
     <header>
         <div id="header">
             <h1>熱中症情報</h1>
-            <div id="header2">
-                <p>大阪の熱中症情報</p>
-            </div>
+            <div id="header2">大阪府 熱中症情報（今日からの情報）</div>
         </div>
         <div id="contents">
-            <h2>熱中症警戒予測（1週間分）</h2>
-            <table>
+            <table class="info-table">
                 <tr>
                     <th>日付</th>
-                    <th>警戒レベル</th>
+                    <th>危険度</th>
                     <th>アドバイス</th>
                 </tr>
                 <tr>
-                    <td>2025/05/29（木）</td>
+                    <td>今日</td>
                     <td>警戒</td>
-                    <td>激しい運動や長時間の外出は控えましょう</td>
+                    <td>こまめな水分補給を</td>
                 </tr>
                 <tr>
-                    <td>2025/05/30（金）</td>
-                    <td>厳重警戒</td>
-                    <td>外出はできるだけ避け、涼しい室内で過ごしましょう</td>
-                </tr>
-                <tr>
-                    <td>2025/05/31（土）</td>
+                    <td>明日</td>
                     <td>注意</td>
-                    <td>こまめな水分補給と休憩を心がけましょう</td>
+                    <td>屋外活動は控えめに</td>
                 </tr>
                 <tr>
-                    <td>2025/06/01（日）</td>
-                    <td>警戒</td>
-                    <td>激しい運動や長時間の外出は控えましょう</td>
-                </tr>
-                <tr>
-                    <td>2025/06/02（月）</td>
-                    <td>厳重警戒</td>
-                    <td>外出はできるだけ避け、涼しい室内で過ごしましょう</td>
-                </tr>
-                <tr>
-                    <td>2025/06/03（火）</td>
+                    <td>明後日</td>
                     <td>注意</td>
-                    <td>こまめな水分補給と休憩を心がけましょう</td>
-                </tr>
-                <tr>
-                    <td>2025/06/04（水）</td>
-                    <td>警戒</td>
-                    <td>激しい運動や長時間の外出は控えましょう</td>
+                    <td>涼しい場所で休憩</td>
                 </tr>
             </table>
+            <div class="comment">※熱中症にご注意ください。</div>
         </div>
     </header>
 </body>

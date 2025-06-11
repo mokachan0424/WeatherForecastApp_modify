@@ -41,6 +41,12 @@
             background: #555353;
             color: white;
         }
+
+        .comment {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #333;
+        }
     </style>
 </head>
 
@@ -48,56 +54,34 @@
     <header>
         <div id="header">
             <h1>気圧情報</h1>
-            <div id="header2">
-                <p>大阪の気圧情報</p>
-            </div>
+            <div id="header2">大阪府 気圧情報（今日からの情報）</div>
         </div>
     </header>
     <main>
         <div id="contents">
-            <h2>気圧予測（1週間分）</h2>
-            <table border="1">
+            <table class="info-table">
                 <tr>
                     <th>日付</th>
-                    <th>気圧（hPa）</th>
-                    <th>コメント</th>
+                    <th>気圧(hPa)</th>
+                    <th>体調への影響</th>
                 </tr>
                 <tr>
-                    <td>2025/05/29（木）</td>
+                    <td>今日</td>
                     <td>1012</td>
+                    <td>やや不安定</td>
+                </tr>
+                <tr>
+                    <td>明日</td>
+                    <td>1015</td>
                     <td>安定</td>
                 </tr>
                 <tr>
-                    <td>2025/05/30（金）</td>
-                    <td>1010</td>
-                    <td>やや低め</td>
-                </tr>
-                <tr>
-                    <td>2025/05/31（土）</td>
+                    <td>明後日</td>
                     <td>1008</td>
-                    <td>低め、体調注意</td>
-                </tr>
-                <tr>
-                    <td>2025/06/01（日）</td>
-                    <td>1011</td>
-                    <td>安定</td>
-                </tr>
-                <tr>
-                    <td>2025/06/02（月）</td>
-                    <td>1007</td>
-                    <td>低め、頭痛注意</td>
-                </tr>
-                <tr>
-                    <td>2025/06/03（火）</td>
-                    <td>1009</td>
-                    <td>やや低め</td>
-                </tr>
-                <tr>
-                    <td>2025/06/04（水）</td>
-                    <td>1013</td>
-                    <td>安定</td>
+                    <td>頭痛注意</td>
                 </tr>
             </table>
+            <div class="comment">※気圧変化による体調変化にご注意ください。</div>
         </div>
     </main>
 </body>
