@@ -46,6 +46,12 @@
             background: #555353;
             color: white;
         }
+
+        .comment {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #555353;
+        }
     </style>
 </head>
 
@@ -53,15 +59,13 @@
     <header>
         <div id="header">
             <h1>花粉情報</h1>
-            <div id="header2">
-                <p>大阪の花粉情報</p>
-            </div>
+            <div id="header2">大阪府 花粉情報（今日からの情報）</div>
         </div>
         <div id="contents">
-            <h2>花粉予測（1週間分）</h2>
-            <table>
+            <table class="info-table">
                 <tr>
                     <th>日付</th>
+
                     <th>花粉量</th>
                     <th>アドバイス</th>
                 </tr>
@@ -97,10 +101,12 @@
                 </tr>
                 <tr>
                     <td>2025/06/17（火）</td>
+
                     <td>少ない</td>
-                    <td>外出時は念のため対策を</td>
+                    <td>比較的安心</td>
                 </tr>
             </table>
+            <div class="comment">※花粉症の方は最新情報にご注意ください。</div>
         </div>
     </header>
 </body>

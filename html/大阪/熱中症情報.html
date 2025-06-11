@@ -46,6 +46,12 @@
             background: #555353;
             color: white;
         }
+
+        .comment {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #333;
+        }
     </style>
 </head>
 
@@ -53,19 +59,17 @@
     <header>
         <div id="header">
             <h1>熱中症情報</h1>
-            <div id="header2">
-                <p>大阪の熱中症情報</p>
-            </div>
+            <div id="header2">大阪府 熱中症情報（今日からの情報）</div>
         </div>
         <div id="contents">
-            <h2>熱中症警戒予測（1週間分）</h2>
-            <table>
+            <table class="info-table">
                 <tr>
                     <th>日付</th>
-                    <th>警戒レベル</th>
+                    <th>危険度</th>
                     <th>アドバイス</th>
                 </tr>
                 <tr>
+
                     <td>2025/06/11（水）</td>
                     <td>警戒</td>
                     <td>激しい運動や長時間の外出は控えましょう</td>
@@ -99,8 +103,10 @@
                     <td>2025/06/17（火）</td>
                     <td>警戒</td>
                     <td>激しい運動や長時間の外出は控えましょう</td>
+
                 </tr>
             </table>
+            <div class="comment">※熱中症にご注意ください。</div>
         </div>
     </header>
 </body>

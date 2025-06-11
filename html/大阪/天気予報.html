@@ -53,10 +53,50 @@
     <header>
         <div id="header">
             <h1>天気予報</h1>
-            <div id="header2">
-                <p>大阪の天気予報情報</p>
+            <div id="header2">大阪府 天気予報（今日からの情報）</div>
+            <div id="contents">
+                <table class="info-table">
+                    <tr>
+                        <th>日付</th>
+                        <th>天気</th>
+                        <th>最高気温</th>
+                        <th>最低気温</th>
+                        <th>降水確率</th>
+                        <th>風速</th>
+                        <th>信頼度</th>
+                    </tr>
+                    <tr>
+                        <td>今日</td>
+                        <td><img src="../../img/hare.png" alt="晴れ" width="32"> 晴れ</td>
+                        <td>30℃</td>
+                        <td>20℃</td>
+                        <td>10%</td>
+                        <td>3m/s</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>明日</td>
+                        <td><img src="../../img/kumori.png" alt="くもり" width="32"> くもり</td>
+                        <td>28℃</td>
+                        <td>19℃</td>
+                        <td>30%</td>
+                        <td>4m/s</td>
+                        <td>B</td>
+                    </tr>
+                    <tr>
+                        <td>明後日</td>
+                        <td><img src="../../img/ame.png" alt="雨" width="32"> 雨</td>
+                        <td>25℃</td>
+                        <td>18℃</td>
+                        <td>70%</td>
+                        <td>5m/s</td>
+                        <td>B</td>
+                    </tr>
+                </table>
+                <div class="comment">※最新の天気情報は随時ご確認ください。</div>
             </div>
         </div>
+
         <div id="contents">
             <h2>天気予報（1週間分）</h2>
             <table>
@@ -118,6 +158,7 @@
                 </tr>
             </table>
         </div>
+
     </header>
 </body>
 

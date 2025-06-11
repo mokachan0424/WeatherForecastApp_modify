@@ -41,6 +41,12 @@
             background: #46464e;
             color: white;
         }
+
+        .comment {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #333;
+        }
     </style>
 </head>
 
@@ -48,16 +54,14 @@
     <header>
         <div id="header">
             <h1>紫外線情報</h1>
-            <div id="header2">
-                <p>大阪の紫外線情報</p>
-            </div>
+            <div id="header2">大阪府 紫外線情報（今日からの情報）</div>
     </header>
     <main>
         <div id="contents">
-            <h2>紫外線予測（1週間分）</h2>
-            <table border="1">
+            <table class="info-table">
                 <tr>
                     <th>日付</th>
+
                     <th>紫外線情報</th>
                 </tr>
                 <tr>
@@ -87,8 +91,10 @@
                 <tr>
                     <td>2025/06/17（火）</td>
                     <td>中程度（日焼け止めを塗るなど対策を）</td>
+
                 </tr>
             </table>
+            <div class="comment">※紫外線対策を忘れずに。</div>
         </div>
     </main>
 </body>
