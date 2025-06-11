@@ -30,47 +30,6 @@
             text-shadow: 2px 2px 8px #fff7e6, 0 2px 8px #a1422744;
         }
 
-        #contents {
-            text-align: center;
-            margin: 0 auto 24px auto;
-            font-size: 1.2em;
-            font-weight: 900;
-            color: #222;
-            border-radius: 18px;
-            padding: 20px 0 20px 0;
-            max-width: 600px;
-            background: #fff;
-            box-shadow: 0 2px 8px #7ec6e644;
-        }
-
-        .pref-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 24px 32px;
-            margin: 24px auto 0 auto;
-            max-width: 500px;
-        }
-
-        .pref-btn {
-            background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
-            color: #a14227;
-            border: 2px solid #f6d365;
-            border-radius: 14px;
-            font-size: 1.2em;
-            font-weight: bold;
-            padding: 18px 32px;
-            margin: 0 0 0 0;
-            cursor: pointer;
-            box-shadow: 0 2px 8px #f6d36544;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .pref-btn:hover {
-            background: #ffe0b2;
-            color: #d95c00;
-        }
-
         @media (max-width: 600px) {
 
             #header,
@@ -91,18 +50,102 @@
     <div id="header">
         <h1>近畿地方</h1>
         <div style="font-size:1.1em; color:#333; margin-top:8px;">都道府県を選択してください</div>
-    </div>
-    <div id="contents">
-        <div class="pref-list">
-            <button class="pref-btn" onclick="location.href='../weather.html'">大阪府</button>
-            <button class="pref-btn" onclick="location.href='../weather京都.html'">兵庫県</button>
-            <button class="pref-btn" onclick="location.href='../weather三重.html'">京都府</button>
-            <button class="pref-btn" onclick="location.href='../weather滋賀.html'">滋賀県</button>
-            <button class="pref-btn" onclick="location.href='../weather奈良.html'">奈良県</button>
-            <button class="pref-btn" onclick="location.href='../weather兵庫.html'">和歌山県</button>
-            <button class="pref-btn" onclick="location.href='../weather和歌山.html'">三重県</button>
+        <div style="position:relative; width:100%; max-width:420px; margin:24px auto 0 auto;">
+            <img src="../img/map-kinki.png" alt="近畿地方地図"
+                style="width:100%; border-radius:18px; box-shadow:0 2px 12px #8882; background:#fff;" />
+            <!-- 矢印と県名ボックス（県名→矢印→地図方向に修正） -->
+            <div style="position:absolute; left:75%; top:25%; cursor:pointer;"
+                onclick="location.href='../weather京都.html'">
+                <div style="transform:translate(-50%,0); display:flex; align-items:center; white-space:nowrap;">
+                    <svg width="60" height="40">
+                        <line x1="0" y1="20" x2="60" y2="20" stroke="#247cff" stroke-width="4"
+                            marker-end="url(#arrowhead)" />
+                    </svg>
+                    <div
+                        style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #247cff44; padding:4px 24px; font-weight:bold; color:#247cff; border:2px solid #247cff; margin-left:8px; font-size:1.2em; letter-spacing:0.2em;">
+                        京都府</div>
+                </div>
+            </div>
+            <div style="position:absolute; left:25%; top:42%; cursor:pointer;"
+                onclick="location.href='../weather.html'">
+                <div style="transform:translate(-50%,0); display:flex; align-items:center; white-space:nowrap;">
+                    <div
+                        style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #a1422744; padding:4px 24px; font-weight:bold; color:#a14227; border:2px solid #a14227; margin-right:8px; font-size:1.2em; letter-spacing:0.2em;">
+                        大阪府</div>
+                    <svg width="60" height="40">
+                        <line x1="60" y1="20" x2="0" y2="20" stroke="#a14227" stroke-width="4"
+                            marker-end="url(#arrowhead)" />
+                    </svg>
+                </div>
+            </div>
+            <div style="position:absolute; left:100%; top:40%; cursor:pointer;"
+                onclick="location.href='../weather三重.html'">
+                <div style="transform:translate(-50%,0); display:flex; align-items:center; white-space:nowrap;">
+                    <svg width="60" height="40">
+                        <line x1="0" y1="20" x2="60" y2="20" stroke="#f6d365" stroke-width="4"
+                            marker-end="url(#arrowhead)" />
+                    </svg>
+                    <div
+                        style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #f6d36544; padding:4px 24px; font-weight:bold; color:#f6d365; border:2px solid #f6d365; margin-left:8px; font-size:1.2em; letter-spacing:0.2em;">
+                        三重県</div>
+                </div>
+            </div>
+            <div style="position:absolute; left:50%; top:5%; cursor:pointer;"
+                onclick="location.href='../weather滋賀.html'">
+                <div style="transform:translate(-50%,0); display:flex; align-items:center; white-space:nowrap;">
+                    <div
+                        style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #7ec6e644; padding:4px 24px; font-weight:bold; color:#7ec6e6; border:2px solid #7ec6e6; margin-right:8px; font-size:1.2em; letter-spacing:0.2em;">
+                        滋賀県</div>
+                    <svg width="60" height="40">
+                        <line x1="60" y1="20" x2="0" y2="20" stroke="#7ec6e6" stroke-width="4"
+                            marker-end="url(#arrowhead)" />
+                    </svg>
+                </div>
+            </div>
+            <div style="position:absolute; left:0%; top:20%; cursor:pointer;"
+                onclick="location.href='../weather兵庫.html'">
+                <div style="transform:translate(-50%,0); display:flex; align-items:center; white-space:nowrap;">
+                    <div
+                        style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #ff798444; padding:4px 24px; font-weight:bold; color:#ff7984; border:2px solid #ff7984; margin-right:8px; font-size:1.2em; letter-spacing:0.2em;">
+                        兵庫県</div>
+                    <svg width="60" height="40">
+                        <line x1="60" y1="20" x2="0" y2="20" stroke="#ff7984" stroke-width="4"
+                            marker-end="url(#arrowhead)" />
+                    </svg>
+                </div>
+            </div>
+            <div style="position:absolute; left:85%; top:55%; cursor:pointer;"
+                onclick="location.href='../weather奈良.html'">
+                <div style="transform:translate(-50%,0); display:flex; align-items:center; white-space:nowrap;">
+                    <svg width="60" height="40">
+                        <line x1="0" y1="20" x2="60" y2="20" stroke="#ff8c24" stroke-width="4"
+                            marker-end="url(#arrowhead)" />
+                    </svg>
+                    <div
+                        style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #ff8c2444; padding:4px 24px; font-weight:bold; color:#ff8c24; border:2px solid #ff8c24; margin-left:8px; font-size:1.2em; letter-spacing:0.2em;">
+                        奈良県</div>
+                </div>
+            </div>
+            <div style="position:absolute; left:15%; top:71%; cursor:pointer;"
+                onclick="location.href='../weather和歌山.html'">
+                <div style="transform:translate(-50%,0); display:flex; align-items:center; white-space:nowrap;">
+                    <div
+                        style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #00b89444; padding:4px 24px; font-weight:bold; color:#00b894; border:2px solid #00b894; margin-right:8px; font-size:1.2em; letter-spacing:0.2em;">
+                        和歌山県</div>
+                    <svg width="60" height="40">
+                        <line x1="60" y1="20" x2="0" y2="20" stroke="#00b894" stroke-width="4"
+                            marker-end="url(#arrowhead)" />
+                    </svg>
+                </div>
+            </div>
+            <svg width="0" height="0">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                        <polygon points="10 0, 0 3.5, 10 7" fill="currentColor" />
+                    </marker>
+                </defs>
+            </svg>
         </div>
-        <div style="margin-top:24px; font-size:0.95em; color:#555;">※未実装の都道府県は今後追加予定です。</div>
     </div>
 </body>
 

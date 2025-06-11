@@ -173,15 +173,15 @@
             border-radius: 12px; box-shadow: 0 2px 8px #f6d36544; padding: 20px 24px;">
             <!-- 日替わりメッセージ例 -->
             <script>
-                // サンプル天気データ（日付ごとに変更可）
+                // 三重らしいサンプル天気データ
                 var dailyInfo = [
-                    { date: '2025/05/29', weather: 'くもり', msg: '今日はくもり。薄手の長袖が快適です。傘は念のため持参を。' },
-                    { date: '2025/05/30', weather: '晴れ', msg: '今日は晴れ。半袖でOK！紫外線対策も忘れずに。' },
-                    { date: '2025/05/31', weather: 'くもり時々晴れ', msg: 'くもり時々晴れ。羽織りものがあると安心。' },
-                    { date: '2025/06/01', weather: '晴れ', msg: '晴れ。日差しが強いので帽子や日傘を。' },
-                    { date: '2025/06/02', weather: 'くもり', msg: 'くもり。体温調節しやすい服装で。' },
-                    { date: '2025/06/03', weather: 'くもり一時雨', msg: 'くもり一時雨。折りたたみ傘を持って出かけましょう。' },
-                    { date: '2025/06/04', weather: '晴れ', msg: '晴れ。暑さ・紫外線対策をしっかりと！' }
+                    { date: '2025/06/11', weather: '晴れ', msg: '伊勢神宮周辺は晴れやかです。' },
+                    { date: '2025/06/12', weather: 'くもり', msg: 'くもり空の鳥羽も静かです。' },
+                    { date: '2025/06/13', weather: '雨', msg: '志摩の海岸は雨模様。足元にご注意を。' },
+                    { date: '2025/06/14', weather: '晴れ', msg: '晴れた日は鈴鹿山脈が美しいです。' },
+                    { date: '2025/06/15', weather: 'くもり', msg: '松阪牛でパワーチャージ！' },
+                    { date: '2025/06/16', weather: '晴れ', msg: '青空の下、伊賀流忍者の里を散策。' },
+                    { date: '2025/06/17', weather: '雨', msg: '雨の日は温泉でゆったりと。' }
                 ];
                 var today = new Date();
                 var yyyy = today.getFullYear();
@@ -189,7 +189,7 @@
                 var dd = today.getDate().toString().padStart(2, '0');
                 var todayStr = yyyy + '/' + mm + '/' + dd;
                 var info = dailyInfo.find(function (d) { return d.date === todayStr; });
-                if (!info) info = dailyInfo[0]; // データがなければ1日目を表示
+                if (!info) info = dailyInfo[0];
                 document.write('<div><b>今日の天気：</b>' + info.weather + '<br>' + info.msg + '</div>');
             </script>
             <div id="zodiac-mini-ranking" style="margin-top:24px;"></div>
@@ -243,15 +243,15 @@
             style="margin: 8px auto 24px auto; font-size:1.5em; font-weight:normal; text-align:center; max-width:600px; background: #fffbe7; border-radius: 12px; box-shadow: 0 2px 8px #f6d36544; padding: 20px 24px;">
             <!-- 日替わりメッセージ例 -->
             <script>
-                // サンプル天気データ（日付ごとに変更可）
+                // 三重らしいサンプル天気データ
                 var dailyInfo = [
-                    { date: '2025/05/29', weather: 'くもり', msg: '今日はくもり。薄手の長袖が快適です。傘は念のため持参を。' },
-                    { date: '2025/05/30', weather: '晴れ', msg: '今日は晴れ。半袖でOK！紫外線対策も忘れずに。' },
-                    { date: '2025/05/31', weather: 'くもり時々晴れ', msg: 'くもり時々晴れ。羽織りものがあると安心。' },
-                    { date: '2025/06/01', weather: '晴れ', msg: '晴れ。日差しが強いので帽子や日傘を。' },
-                    { date: '2025/06/02', weather: 'くもり', msg: 'くもり。体温調節しやすい服装で。' },
-                    { date: '2025/06/03', weather: 'くもり一時雨', msg: 'くもり一時雨。折りたたみ傘を持って出かけましょう。' },
-                    { date: '2025/06/04', weather: '晴れ', msg: '晴れ。暑さ・紫外線対策をしっかりと！' }
+                    { date: '2025/06/11', weather: '晴れ', msg: '伊勢神宮周辺は晴れやかです。' },
+                    { date: '2025/06/12', weather: 'くもり', msg: 'くもり空の鳥羽も静かです。' },
+                    { date: '2025/06/13', weather: '雨', msg: '志摩の海岸は雨模様。足元にご注意を。' },
+                    { date: '2025/06/14', weather: '晴れ', msg: '晴れた日は鈴鹿山脈が美しいです。' },
+                    { date: '2025/06/15', weather: 'くもり', msg: '松阪牛でパワーチャージ！' },
+                    { date: '2025/06/16', weather: '晴れ', msg: '青空の下、伊賀流忍者の里を散策。' },
+                    { date: '2025/06/17', weather: '雨', msg: '雨の日は温泉でゆったりと。' }
                 ];
                 var today = new Date();
                 var yyyy = today.getFullYear();
@@ -259,7 +259,7 @@
                 var dd = today.getDate().toString().padStart(2, '0');
                 var todayStr = yyyy + '/' + mm + '/' + dd;
                 var info = dailyInfo.find(function (d) { return d.date === todayStr; });
-                if (!info) info = dailyInfo[0]; // データがなければ1日目を表示
+                if (!info) info = dailyInfo[0];
                 document.write('<div><b>今日の天気：</b>' + info.weather + '<br>' + info.msg + '</div>');
             </script>
             <div id="zodiac-mini-ranking" style="margin-top:24px;"></div>
