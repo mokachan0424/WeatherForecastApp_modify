@@ -273,9 +273,9 @@ public class WeatherForecastApp {
     private static final String TARGET_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json"; // 気象庁の天気予報APIのURL
 
     public static void main(String[] args) {
-        WeatherDataFetcher fetcher = new WeatherDataFetcher(); // 天気データ取得用クラスのインスタンスを作成
-        WeatherDataParser parser = new WeatherDataParser(); // JSONデータ解析用クラスのインスタンスを作成
-        WeatherDataPrinter printer = new WeatherDataPrinter(); // 天気データ表示用クラスのインスタンスを作成
+        WeatherDataFetcher fetcher = new WeatherDataFetcher();
+        WeatherDataParser parser = new WeatherDataParser();
+        WeatherDataPrinter printer = new WeatherDataPrinter();
 
         try {
             String jsonData = fetcher.fetchWeatherData(TARGET_URL);
@@ -295,7 +295,6 @@ public class WeatherForecastApp {
                 System.out.println("地震情報の取得に失敗しました。");
             }
 
-
             // 気圧情報出力
             WeatherDataPrinter.printOsakaPressureInfo();
             // 紫外線情報出力
@@ -304,7 +303,7 @@ public class WeatherForecastApp {
             WeatherDataPrinter.printOsakaHeatstrokeInfo();
 
         } catch (IOException | URISyntaxException e) {
-            System.out.println("エラーが発生しました: " + e.getMessage()); // エラー発生時のメッセージを表示
+            System.out.println("エラーが発生しました: " + e.getMessage());
         }
     }
 }
