@@ -4,26 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <title>滋賀県 熱中症情報</title>
-    <link rel="stylesheet" href="../CSS/HOME.css">
+    <style>
+        #header {
+            background-color: #e57373;
+            font-size: 30px;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+    
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+    
+        body {
+            background-color: #fff8f0;
+        }
+    
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+    
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+    
+        th {
+            background: #555353;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="header" style="text-align:center; margin:32px auto 24px auto;">
-        <h1>滋賀県 熱中症情報</h1>
-    </div>
-    <div id="contents"
-        style="text-align:center; margin:0 auto; max-width:600px; background:#fff; border-radius:18px; box-shadow:0 2px 8px #7ec6e644; padding:24px 0;">
-        <h2>滋賀県 熱中症情報（サンプル）</h2>
-        <table class="info-table" style="margin: 0 auto; width:90%; border-collapse:collapse;">
-            <thead style="background:linear-gradient(90deg,#f7e0e0,#f7f7e0);">
+    <header>
+        <div id="header">
+            <h1>熱中症情報</h1>
+            <div id="header2">
+                <p>滋賀の熱中症情報</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>熱中症情報（サンプル）</h2>
+            <table>
                 <tr>
                     <th>日時</th>
                     <th>気温(℃)</th>
                     <th>湿度(%)</th>
                     <th>警戒レベル</th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
                     <td>2025/06/10 12:00</td>
                     <td>31.2</td>
@@ -36,10 +73,10 @@
                     <td>60</td>
                     <td>注意</td>
                 </tr>
-            </tbody>
-        </table>
-        <p style="margin-top:16px; color:#888;">※上記はサンプルデータです。実際の熱中症情報は環境省等の公式発表をご確認ください。</p>
-    </div>
+            </table>
+            <p style="margin-top:16px; color:#888; font-size:0.8em;">※上記はサンプルデータです。実際の熱中症情報は環境省等の公式発表をご確認ください。</p>
+        </div>
+    </header>
 </body>
 
 </html>

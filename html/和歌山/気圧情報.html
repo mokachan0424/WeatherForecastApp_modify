@@ -1,33 +1,82 @@
-<div id="header">
-    <h1>和歌山県 気圧情報</h1>
-    <div class="header2">最新の気圧情報</div>
-</div>
-<div id="contents">
-    <h2>気圧変化予測（例）</h2>
-    <table border="1">
-        <tr>
-            <th>日付</th>
-            <th>気圧(hPa)</th>
-            <th>変化</th>
-            <th>アドバイス</th>
-        </tr>
-        <tr>
-            <td>2025/06/10</td>
-            <td>1009</td>
-            <td>↓</td>
-            <td>体調管理に注意</td>
-        </tr>
-        <tr>
-            <td>2025/06/11</td>
-            <td>1013</td>
-            <td>↑</td>
-            <td>安定傾向</td>
-        </tr>
-        <tr>
-            <td>2025/06/12</td>
-            <td>1006</td>
-            <td>↓</td>
-            <td>頭痛・めまい注意</td>
-        </tr>
-    </table>
-</div>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>気圧情報</title>
+    <style>
+        #header {
+            background-color: #7ec6e6;
+            font-size: 30px;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
+        body {
+            background-color: #e0f7fa;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        th {
+            background: #555353;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="header">
+            <h1>気圧情報</h1>
+            <div id="header2">
+                <p>和歌山の気圧情報</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>気圧情報（サンプル）</h2>
+            <table>
+                <tr>
+                    <th>日時</th>
+                    <th>気圧(hPa)</th>
+                    <th>傾向</th>
+                    <th>体調注意</th>
+                </tr>
+                <tr>
+                    <td>2025/06/10 09:00</td>
+                    <td>1008</td>
+                    <td>下降傾向</td>
+                    <td>頭痛注意</td>
+                </tr>
+                <tr>
+                    <td>2025/06/09 09:00</td>
+                    <td>1012</td>
+                    <td>安定</td>
+                    <td>特になし</td>
+                </tr>
+            </table>
+            <p style="margin-top:16px; color:#888; font-size:0.8em;">※上記はサンプルデータです。実際の気圧情報は気象庁等の公式発表をご確認ください。</p>
+        </div>
+    </header>
+</body>
+
+</html>

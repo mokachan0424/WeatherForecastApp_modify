@@ -4,19 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <title>滋賀県 地震情報</title>
-    <link rel="stylesheet" href="../CSS/HOME.css">
+    <style>
+        #header {
+            background-color: #945a23;
+            font-size: 30px;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+    
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+    
+        body {
+            background-color: #ddd0b8;
+        }
+    
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+    
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+    
+        th {
+            background: #555353;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="header" style="text-align:center; margin:32px auto 24px auto;">
-        <h1>滋賀県 地震情報</h1>
-    </div>
-    <div id="contents"
-        style="text-align:center; margin:0 auto; max-width:600px; background:#fff; border-radius:18px; box-shadow:0 2px 8px #7ec6e644; padding:24px 0;">
-        <h2>滋賀県 地震情報（サンプル）</h2>
-        <p>滋賀県で観測された地震の最新情報をお知らせします。</p>
-        <table class="info-table" style="margin: 0 auto; width:90%; border-collapse:collapse;">
-            <thead style="background:linear-gradient(90deg,#f7d8b2,#f7e0e0);">
+    <header>
+        <div id="header">
+            <h1>地震情報</h1>
+            <div id="header2">
+                <p>滋賀の地震情報</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>地震情報（サンプル）</h2>
+            <table>
                 <tr>
                     <th>発生日時</th>
                     <th>震源地</th>
@@ -24,8 +62,6 @@
                     <th>マグニチュード</th>
                     <th>備考</th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
                     <td>2025/06/09 14:32</td>
                     <td>滋賀県南部</td>
@@ -40,10 +76,10 @@
                     <td>3.8</td>
                     <td>被害報告なし</td>
                 </tr>
-            </tbody>
-        </table>
-        <p style="margin-top:16px; color:#888;">※上記はサンプルデータです。実際の地震情報は気象庁等の公式発表をご確認ください。</p>
-    </div>
+            </table>
+            <p style="margin-top:16px; color:#888; font-size:0.8em;">※上記はサンプルデータです。実際の地震情報は気象庁等の公式発表をご確認ください。</p>
+        </div>
+    </header>
 </body>
 
 </html>

@@ -1,10 +1,90 @@
-<div id="header">
-    <h1>和歌山県 電車遅延情報</h1>
-    <div class="header2">最新の遅延情報</div>
-</div>
-<div id="contents">
-    <h2>和歌山県内主要路線 遅延情報（例）</h2>
-    <table border="1">
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>電車遅延情報</title>
+    <style>
+        #header {
+            background-color: #3b5998;
+            font-size: 30px;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        #header2 {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        #contents {
+            text-align: center;
+            margin: 20px;
+            font-size: 25px;
+        }
+
+        body {
+            background-color: #fff8f0;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 2.5px solid #555353;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        th {
+            background: #555353;
+            color: white;
+        }
+
+        .delay {
+            color: #e57373;
+            font-weight: bold;
+        }
+
+        .normal {
+            color: #247cffb9;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+
+            #header,
+            #header2,
+            #contents,
+            table {
+                max-width: 98vw;
+            }
+
+            th,
+            td {
+                font-size: 0.95em;
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="header">
+            <h1>電車遅延情報</h1>
+            <div id="header2">
+                <p>和歌山の電車遅延情報</p>
+            </div>
+        </div>
+        <div id="contents">
+            <h2>電車遅延情報（サンプル）</h2>
+            <table>
         <tr>
             <th>路線名</th>
             <th>遅延状況</th>
@@ -26,4 +106,9 @@
             <td>4分</td>
         </tr>
     </table>
-</div>
+    <p style="margin-top:16px; color:#888; font-size:0.8em;">※上記はサンプルデータです。実際の遅延情報は各鉄道会社の公式発表をご確認ください。</p>
+    </div>
+</header>
+</body>
+
+</html>
