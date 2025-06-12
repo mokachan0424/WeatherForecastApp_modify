@@ -79,39 +79,55 @@
     <header>
         <div id="header">
             <h1>大阪の電車遅延情報</h1>
-            <div id="header2">大阪府 電車遅延情報（今日からの情報）</div>
+            <div id="header2">
+                <p>主要9路線の運行状況</p>
+            </div>
         </div>
         <div id="contents">
-            <table class="info-table">
-                <tr>
-                    <th>日付</th>
-                    <th>路線名</th>
-                    <th>遅延状況</th>
-                </tr>
-                <tr>
-                    <td>今日</td>
-                    <td>大阪環状線</td>
-                    <td>通常運転</td>
-                </tr>
-                <tr>
-                    <td>今日</td>
-                    <td>御堂筋線</td>
-                    <td>5分遅延</td>
-                </tr>
-                <tr>
-                    <td>明日</td>
-                    <td>阪急京都線</td>
-                    <td>通常運転</td>
-                </tr>
-                <tr>
-                    <td>明後日</td>
-                    <td>南海本線</td>
-                    <td>通常運転</td>
-                </tr>
-            </table>
-            <div class="comment" style="margin-top:10px; font-size:0.95em; color:#555;">※最新の運行情報をご確認ください。</div>
+            <h2>遅延情報一覧</h2>
+            <table id="train-table-js"></table>
+            <div style="margin-top:10px; font-size:0.95em; color:#555;">※情報はサンプルです。実際の遅延状況は各鉄道会社公式サイト等でご確認ください。</div>
         </div>
     </header>
+    <script>
+        // サンプルデータ（API連携時はここを書き換え）
+        var trainLines = [
+            { name: 'JR大阪環状線', status: '平常運転', delay: '', note: '' },
+            { name: 'JR神戸線', status: '遅延', delay: '15分', note: '人身事故の影響' },
+            { name: 'JR京都線', status: '平常運転', delay: '', note: '' },
+            { name: '大阪メトロ御堂筋線', status: '遅延', delay: '5分', note: '車両点検' },
+            { name: '大阪メトロ谷町線', status: '平常運転', delay: '', note: '' },
+            { name: '阪急神戸本線', status: '平常運転', delay: '', note: '' },
+            { name: '阪急京都本線', status: '遅延', delay: '10分', note: '信号トラブル' },
+            { name: '京阪本線', status: '平常運転', delay: '', note: '' },
+            { name: '南海本線', status: '平常運転', delay: '', note: '' }
+        ];
+        // JSでテーブルを生成
+        var table = document.createElement('table');
+        table.style.borderCollapse = 'collapse';
+        table.style.margin = '0 auto';
+        table.style.textAlign = 'center';
+        var thead = document.createElement('thead');
+        var trh = document.createElement('tr');
+        ['路線名', '遅延状況', '遅延時間', '備考'].forEach(function (txt) {
+            var th = document.createElement('th'); th.textContent = txt; trh.appendChild(th);
+        });
+        thead.appendChild(trh);
+        table.appendChild(thead);
+        var tbody = document.createElement('tbody');
+        trainLines.forEach(function (line) {
+            var tr = document.createElement('tr');
+            var statusClass = line.status === '遅延' ? 'delay' : 'normal';
+            tr.innerHTML = '<td>' + line.name + '</td>' +
+                '<td class="' + statusClass + '">' + line.status + '</td>' +
+                '<td>' + (line.delay || '-') + '</td>' +
+                '<td>' + (line.note || '-') + '</td>';
+            tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        var jsTable = document.getElementById('train-table-js');
+        jsTable.parentNode.replaceChild(table, jsTable);
+    </script>
 </body>
 
 </html>

@@ -41,17 +41,6 @@
             background: #555353;
             color: white;
         }
-
-        .info-table {
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .comment {
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: red;
-        }
     </style>
 </head>
 
@@ -59,34 +48,40 @@
     <header>
         <div id="header">
             <h1>地震情報</h1>
-            <div id="header2">大阪府 地震情報（今日からの情報）</div>
+            <div id="header2">
+                <p>大阪周辺の地震情報</p>
+            </div>
         </div>
     </header>
     <main>
         <div id="contents">
-            <table class="info-table">
+            <h2>最近の地震情報（例）</h2>
+            <table border="1">
                 <tr>
-                    <th>日付</th>
-                    <th>発生状況</th>
-                    <th>注意点</th>
+                    <th>発生日時</th>
+                    <th>震源地</th>
+                    <th>最大震度</th>
+                    <th>マグニチュード</th>
                 </tr>
                 <tr>
-                    <td>今日</td>
-                    <td>震度1（南部）</td>
-                    <td>余震に注意</td>
+                    <td>2025/06/02 14:23</td>
+                    <td>大阪府北部</td>
+                    <td>4</td>
+                    <td>5.2</td>
                 </tr>
                 <tr>
-                    <td>明日</td>
-                    <td>なし</td>
-                    <td>通常通り</td>
+                    <td>2025/05/30 09:10</td>
+                    <td>和歌山県南部</td>
+                    <td>3</td>
+                    <td>4.7</td>
                 </tr>
                 <tr>
-                    <td>明後日</td>
-                    <td>なし</td>
-                    <td>通常通り</td>
+                    <td>2025/05/28 21:45</td>
+                    <td>兵庫県南東部</td>
+                    <td>2</td>
+                    <td>3.8</td>
                 </tr>
             </table>
-            <div class="comment">※緊急時は速やかに避難してください。</div>
         </div>
     </main>
 </body>

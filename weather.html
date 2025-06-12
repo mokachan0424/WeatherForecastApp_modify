@@ -141,6 +141,37 @@
         .nav-boxes button:active {
             transform: translateY(0);
         }
+
+        /* ニュースセクションスタイル */
+        #osaka-news {
+            flex: 0 0 380px;
+            max-width: 380px;
+            min-width: 260px;
+            margin-top: 24px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px #8882;
+            padding: 24px 32px;
+            text-align: center;
+            align-self: flex-start;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #osaka-news h2 {
+            color: #a14227;
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+
+        #osaka-news ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.1em;
+            color: #333;
+        }
     </style>
 </head>
 <link rel="stylesheet" :url="text/css" href="CSS/HOME.css">
@@ -308,6 +339,22 @@
                     document.getElementById('zodiac-mini-ranking').innerHTML = htmlMini;
                 })();
             </script>
+        </div>
+        <!-- ニュース欄を中央寄せで表示 -->
+        <div
+            style="display:flex; justify-content:center; align-items:flex-start; gap:40px; max-width:1200px; margin:0 auto;">
+            <div style="flex:1; min-width:420px;"></div>
+            <div id="osaka-news"
+                style="flex:0 0 380px; max-width:380px; min-width:260px; margin-top:24px; background:#fff; border-radius:18px; box-shadow:0 2px 12px #8882; padding:24px 32px; text-align:center; align-self:flex-start; margin-left:auto; margin-right:auto;">
+                <h2 style="color:#a14227; font-size:1.4em; margin-bottom:12px; letter-spacing:0.1em;">大阪府 今日のニュース</h2>
+                <ul style="list-style:none; padding:0; margin:0; font-size:1.1em; color:#333;">
+                    <li>・大阪市内で新たな観光スポットがオープン</li>
+                    <li>・阪神高速で一部区間の通行止め（工事のため）</li>
+                    <li>・大阪府内の小学校で運動会が開催</li>
+                    <li>・梅田エリアでグルメフェス開催中</li>
+                    <li>・大阪城公園で夜間ライトアップイベント</li>
+                </ul>
+            </div>
         </div>
     </header>
 
