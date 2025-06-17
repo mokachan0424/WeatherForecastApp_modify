@@ -266,6 +266,120 @@
                     document.getElementById('zodiac-top3').innerHTML = htmlTop3;
                 })();
             </script>
+            <div id="ice-index" style="margin:18px auto 0 auto; max-width:600px; text-align:center;"></div>
+            <script>
+                (function () {
+                    // サンプル気温データ（実際はAPI等で取得可）
+                    var today = new Date();
+                    var yyyy = today.getFullYear();
+                    var mm = (today.getMonth() + 1).toString().padStart(2, '0');
+                    var dd = today.getDate().toString().padStart(2, '0');
+                    var todayStr = yyyy + '/' + mm + '/' + dd;
+                    // 日付ごとの気温サンプル
+                    var tempData = {
+                        '2025/06/17': 32,
+                        '2025/06/18': 28,
+                        '2025/06/19': 22,
+                        '2025/06/20': 18,
+                        '2025/06/21': 15
+                    };
+                    var temp = tempData[todayStr] !== undefined ? tempData[todayStr] : 25; // データなければ25℃
+                    var iceText = '';
+                    var iceImg = '';
+                    if (temp >= 30 && temp <= 40) {
+                        iceText = 'アイス指数：トリプルアイス級！猛暑日にはアイスが最高！';
+                        iceImg = 'img/toripuruaice.png';
+                    } else if (temp >= 20 && temp < 30) {
+                        iceText = 'アイス指数：ダブルアイス級！暑い日はアイスでリフレッシュ！';
+                        iceImg = 'img/doubleice.png';
+                    } else if (temp >= 10 && temp < 20) {
+                        iceText = 'アイス指数：シングルアイス級。ちょっと肌寒いけどアイスもアリ？';
+                        iceImg = 'img/singleice.png';
+                    } else {
+                        iceText = 'アイス指数：今日はアイスより温かい飲み物がオススメ。';
+                        iceImg = '';
+                    }
+                    var html = '<div style="margin-top:18px; font-size:0.95em; background:#e0f7fa; border-radius:10px; padding:12px 8px; box-shadow:0 1px 4px #247cff22; display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;">';
+                    if (iceImg) {
+                        html += '<img src="' + iceImg + '" alt="アイス指数" style="width:140px; height:100px; object-fit:contain;">';
+                    }
+                    html += '<span style="font-weight:bold; color:#247cff; font-size:0.98em;">' + iceText + '（気温：' + temp + '℃）</span>';
+                    html += '</div>';
+                    document.getElementById('ice-index').innerHTML = html;
+                })();
+            </script>
+            <div id="dog-walk" style="margin:18px auto 0 auto; max-width:600px; text-align:center;"></div>
+            <script>
+                (function () {
+                    // サンプル地面温度データ（実際はAPI等で取得可）
+                    var today = new Date();
+                    var yyyy = today.getFullYear();
+                    var mm = (today.getMonth() + 1).toString().padStart(2, '0');
+                    var dd = today.getDate().toString().padStart(2, '0');
+                    var todayStr = yyyy + '/' + mm + '/' + dd;
+                    // 日付ごとの地面温度サンプル（朝・昼・夜）
+                    var groundTempData = {
+                        '2025/06/17': { morning: 24, noon: 48, night: 30 },
+                        '2025/06/18': { morning: 22, noon: 42, night: 28 },
+                        '2025/06/19': { morning: 20, noon: 38, night: 25 },
+                        '2025/06/20': { morning: 18, noon: 32, night: 22 },
+                        '2025/06/21': { morning: 16, noon: 28, night: 20 }
+                    };
+                    var temps = groundTempData[todayStr] || { morning: 22, noon: 40, night: 26 };
+                    // 散歩可否ロジック
+                    function getWalkLevel(temp) {
+                        if (temp < 30) return { mark: '◎', text: '最適', color: '#2ecc71' };
+                        if (temp < 40) return { mark: '○', text: '注意', color: '#f1c40f' };
+                        return { mark: '×', text: '避ける', color: '#e74c3c' };
+                    }
+                    var levels = {
+                        morning: getWalkLevel(temps.morning),
+                        noon: getWalkLevel(temps.noon),
+                        night: getWalkLevel(temps.night)
+                    };
+                    var dogImg = '<img src="img/wanko.png" alt="犬" style="height:1.2em; vertical-align:middle; margin-right:6px;">';
+                    var html = '<div style="margin-top:18px; font-size:0.98em; background:#fff3e0; border-radius:10px; padding:12px 8px; box-shadow:0 1px 4px #ffa64122;">';
+                    html += '<b>' + dogImg + '今日の犬のお散歩予想（地面温度から）</b><br>';
+                    html += '<table style="margin:0 auto; font-size:1em; border-collapse:collapse;">';
+                    html += '<tr><th style="padding:4px 12px;">時間帯</th><th style="padding:4px 12px;">地面温度</th><th style="padding:4px 12px;">おすすめ度</th></tr>';
+                    html += '<tr><td>朝</td><td>' + temps.morning + '℃</td><td style="color:' + levels.morning.color + '; font-weight:bold;">' + dogImg + levels.morning.mark + ' ' + levels.morning.text + '</td></tr>';
+                    html += '<tr><td>昼</td><td>' + temps.noon + '℃</td><td style="color:' + levels.noon.color + '; font-weight:bold;">' + dogImg + levels.noon.mark + ' ' + levels.noon.text + '</td></tr>';
+                    html += '<tr><td>夜</td><td>' + temps.night + '℃</td><td style="color:' + levels.night.color + '; font-weight:bold;">' + dogImg + levels.night.mark + ' ' + levels.night.text + '</td></tr>';
+                    html += '</table>';
+                    html += '<div style="font-size:0.92em; color:#a14227; margin-top:6px;">※地面温度が高いと肉球を火傷する恐れがあります。30℃以上は注意、40℃以上は避けましょう。</div>';
+                    html += '</div>';
+                    document.getElementById('dog-walk').innerHTML = html;
+                })();
+            </script>
+            <div id="alien-chance" style="margin:18px auto 0 auto; max-width:600px; text-align:center;"></div>
+            <script>
+                (function () {
+                    // 日付ごとに確率を変化させる（サンプルロジック）
+                    var today = new Date();
+                    var yyyy = today.getFullYear();
+                    var mm = (today.getMonth() + 1).toString().padStart(2, '0');
+                    var dd = today.getDate().toString().padStart(2, '0');
+                    var seed = parseInt(yyyy + mm + dd);
+                    function seededRandom(seed) {
+                        var x = Math.sin(seed) * 10000;
+                        return x - Math.floor(x);
+                    }
+                    var chance = Math.floor(seededRandom(seed) * 100) + 1; // 1〜100％
+                    var level = '';
+                    var emoji = '';
+                    if (chance >= 90) { level = '超高確率！'; emoji = '🛸👽✨'; }
+                    else if (chance >= 70) { level = '高め'; emoji = '🛸👽'; }
+                    else if (chance >= 40) { level = 'やや高め'; emoji = '👽'; }
+                    else if (chance >= 20) { level = '低め'; emoji = '🛸'; }
+                    else { level = 'ほぼゼロ'; emoji = '🌌'; }
+                    var html = '<div style="margin-top:18px; font-size:1.05em; background:#e8eaf6; border-radius:10px; padding:12px 8px; box-shadow:0 1px 4px #247cff22;">';
+                    html += '<b>今日の宇宙人と会える確率</b><br>';
+                    html += '<span style="font-size:1.2em; font-weight:bold; color:#3949ab;">' + chance + '%</span>　<span style="font-size:1.1em; color:#5c6bc0;">' + level + '</span> <span style="font-size:1.3em;">' + emoji + '</span>';
+                    html += '<div style="font-size:0.92em; color:#666; margin-top:6px;">※これはジョークです。夜空を見上げてみましょう！</div>';
+                    html += '</div>';
+                    document.getElementById('alien-chance').innerHTML = html;
+                })();
+            </script>
         </div>
 
         </script>
