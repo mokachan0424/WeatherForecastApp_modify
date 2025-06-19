@@ -190,9 +190,10 @@
             </div>
         </div>
         <div id="contents">
-            <h2>遅延情報一覧</h2>
+            <h2>遅延情報一覧（2025年6月19日）</h2>
             <table id="train-table-js"></table>
-            <div style="margin-top:10px; font-size:0.95em; color:#555;">※情報はサンプルです。実際の遅延状況は各鉄道会社公式サイト等でご確認ください。</div>
+            <div style="margin-top:10px; font-size:0.95em; color:#555;">
+                ※情報は2025年6月19日サンプルです。実際の遅延状況は各鉄道会社公式サイト等でご確認ください。</div>
         </div>
     </header>
     <!-- 近畿地方に戻るボタンを画面左上に追加（weather.htmlと同じデザイン） -->
@@ -201,15 +202,15 @@
         <span class="back-text">前のページ</span>
     </button>
     <script>
-        // サンプルデータ（API連携時はここを書き換え）
+        // サンプルデータ（2025年6月19日用）
         var trainLines = [
             { name: 'JR大阪環状線', status: '平常運転', delay: '', note: '' },
-            { name: 'JR神戸線', status: '遅延', delay: '15分', note: '人身事故の影響' },
+            { name: 'JR神戸線', status: '遅延', delay: '10分', note: '信号トラブル' },
             { name: 'JR京都線', status: '平常運転', delay: '', note: '' },
             { name: '大阪メトロ御堂筋線', status: '遅延', delay: '5分', note: '車両点検' },
             { name: '大阪メトロ谷町線', status: '平常運転', delay: '', note: '' },
             { name: '阪急神戸本線', status: '平常運転', delay: '', note: '' },
-            { name: '阪急京都本線', status: '遅延', delay: '10分', note: '信号トラブル' },
+            { name: '阪急京都本線', status: '遅延', delay: '8分', note: '混雑' },
             { name: '京阪本線', status: '平常運転', delay: '', note: '' },
             { name: '南海本線', status: '平常運転', delay: '', note: '' }
         ];
